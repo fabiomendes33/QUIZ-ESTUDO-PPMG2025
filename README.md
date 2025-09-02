@@ -1,3 +1,3 @@
 # QUIZ-ESTUDO-PPMG2025
 SISTEMA DE ESTUDO PPMG2025
-https://github.com/fabiomendes33/QUIZ-ESTUDO-PPMG2025.git
+https://fabiomendes33.github.io/QUIZ-ESTUDO-PPMG2025/
