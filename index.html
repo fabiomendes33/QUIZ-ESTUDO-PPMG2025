@@ -3,526 +3,542 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz Polícia Penal 2025 - Sistema Completo</title>
+    <title>Quiz Polícia Penal 2025 - AOCP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
-      body {
-        font-family: "Poppins", sans-serif;
-        -webkit-tap-highlight-color: transparent;
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+      * {
+        font-family: "Inter", sans-serif;
       }
+
       .gradient-bg {
-        background: linear-gradient(
-          135deg,
-          #667eea 0%,
-          #764ba2 50%,
-          #f093fb 100%
-        );
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       }
-      .glass-effect {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
+
       .card-hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.3s ease;
       }
+
       .card-hover:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
       }
+
+      .option-item {
+        transition: all 0.2s ease;
+      }
+
       .pulse-animation {
         animation: pulse 2s infinite;
       }
+
       @keyframes pulse {
         0%,
         100% {
           opacity: 1;
         }
         50% {
-          opacity: 0.7;
+          opacity: 0.5;
         }
       }
-      .slide-in {
-        animation: slideIn 0.5s ease-out;
-      }
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
+
+      @media print {
+        .no-print {
+          display: none !important;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+        body {
+          background: white !important;
         }
-      }
-      .progress-bar {
-        transition: width 0.3s ease;
-      }
-      .btn-primary {
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        transition: all 0.3s ease;
-      }
-      .btn-primary:hover {
-        transform: scale(1.05);
-        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-      }
-      .mobile-optimized {
-        touch-action: manipulation;
       }
     </style>
   </head>
-  <body class="gradient-bg min-h-screen mobile-optimized">
+
+  <body class="gradient-bg min-h-screen">
     <!-- Login Screen -->
     <div
       id="loginScreen"
       class="min-h-screen flex items-center justify-center p-4"
     >
-      <div class="glass-effect rounded-2xl p-8 w-full max-w-md slide-in">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
         <div class="text-center mb-8">
           <div class="text-6xl mb-4">🚔</div>
-          <h1 class="text-3xl font-bold text-white mb-2">Quiz Polícia Penal</h1>
-          <p class="text-white/80">Sistema de Treinamento 2025</p>
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">
+            Quiz Polícia Penal
+          </h1>
+          <p class="text-gray-600">AOCP 2025 - Sistema de Estudos</p>
         </div>
 
         <form id="loginForm" class="space-y-6">
           <div>
-            <label class="block text-white font-medium mb-3 text-lg"
-              >Nome Completo</label
-            >
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              👤 Seu Nome
+            </label>
             <input
               type="text"
               id="userName"
+              class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+              placeholder="Digite seu nome completo"
               required
-              class="w-full px-6 py-4 rounded-xl bg-white/20 text-white placeholder-white/60 border-2 border-white/30 focus:border-white focus:outline-none focus:ring-4 focus:ring-white/30 transition-all text-lg"
-              placeholder="Digite seu nome para começar"
             />
           </div>
 
           <button
             type="submit"
-            class="w-full btn-primary text-white py-4 px-8 rounded-xl font-bold text-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors"
           >
-            🚀 Entrar no Quiz
+            🚀 Iniciar Quiz
           </button>
         </form>
 
-        <div class="mt-6 text-center">
-          <p class="text-white/60 text-sm">
-            Banca AOCP • 2025 • Questões Inéditas
-          </p>
+        <div class="mt-6 text-center text-sm text-gray-500">
+          <p id="totalQuestionsInfo">📊 Carregando questões...</p>
+          <p>💾 Progresso salvo automaticamente</p>
         </div>
       </div>
     </div>
 
-    <!-- Main Quiz Interface -->
-    <div id="quizInterface" class="hidden min-h-screen">
+    <!-- Subject Selection Screen -->
+    <div id="subjectSelection" class="hidden min-h-screen p-4">
       <!-- Header -->
-      <header class="glass-effect p-4 sticky top-0 z-50">
-        <div
-          class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4"
-        >
-          <div class="flex items-center gap-3">
-            <div class="text-2xl">🚔</div>
-            <div>
-              <h1 class="text-white font-bold text-lg">Quiz Polícia Penal</h1>
-              <p class="text-white/80 text-sm" id="userWelcome">Bem-vindo!</p>
-            </div>
+      <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="text-center md:text-left mb-4 md:mb-0">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">
+              🚔 Quiz Polícia Penal 2025
+            </h1>
+            <p class="text-gray-600">
+              Olá, <span id="userNameDisplay" class="font-medium"></span>!
+              Escolha uma matéria para estudar.
+            </p>
           </div>
 
-          <div class="flex items-center gap-4 text-white">
+          <div
+            class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6"
+          >
             <div class="text-center">
-              <div class="text-xl font-bold" id="scoreDisplay">0</div>
-              <div class="text-xs">Pontos</div>
+              <div class="text-2xl font-bold text-blue-600" id="scoreDisplay">
+                0
+              </div>
+              <div class="text-sm text-gray-500">Pontos</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold" id="progressDisplay">0/500</div>
-              <div class="text-xs">Questões</div>
+              <div
+                class="text-2xl font-bold text-green-600"
+                id="progressDisplay"
+              >
+                0/1000
+              </div>
+              <div class="text-sm text-gray-500">Questões</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subject Cards -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6"
+      >
+        <!-- Português -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('portugues')"
+        >
+          <div class="text-4xl mb-4 text-center">📚</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            PORTUGUÊS
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            Gramática, interpretação e redação
+          </p>
+          <div
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="portugues-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Direito Penal -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('penal')"
+        >
+          <div class="text-4xl mb-4 text-center">⚖️</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            DIREITO PENAL
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            Parte geral e especial
+          </p>
+          <div
+            class="bg-red-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div id="penal-status" class="mt-2 text-xs text-gray-500 text-center">
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Direito Processual Penal -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('processual')"
+        >
+          <div class="text-4xl mb-4 text-center">📋</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            PROCESSUAL PENAL
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            Código de Processo Penal
+          </p>
+          <div
+            class="bg-green-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="processual-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Direito Constitucional -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('constitucional')"
+        >
+          <div class="text-4xl mb-4 text-center">🏛️</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            CONSTITUCIONAL
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            Constituição Federal
+          </p>
+          <div
+            class="bg-purple-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="constitucional-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Raciocínio Lógico -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('logico')"
+        >
+          <div class="text-4xl mb-4 text-center">🧮</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            RACIOCÍNIO LÓGICO
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            Lógica e matemática
+          </p>
+          <div
+            class="bg-yellow-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="logico-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Direitos Humanos -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('humanos')"
+        >
+          <div class="text-4xl mb-4 text-center">🤝</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            DIREITOS HUMANOS
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            Declarações e tratados
+          </p>
+          <div
+            class="bg-indigo-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="humanos-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Legislação Especial -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('especial')"
+        >
+          <div class="text-4xl mb-4 text-center">📖</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            LEGISLAÇÃO ESPECIAL
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">Leis específicas</p>
+          <div
+            class="bg-pink-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="especial-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Informática -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('informatica')"
+        >
+          <div class="text-4xl mb-4 text-center">💻</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            INFORMÁTICA
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            Hardware, software e redes
+          </p>
+          <div
+            class="bg-cyan-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="informatica-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="bg-white rounded-2xl shadow-lg p-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <button
+            id="showResultsBtn"
+            class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors no-print"
+          >
+            📊 Ver Resultados
+          </button>
+          <button
+            id="finishQuizBtn"
+            class="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium transition-colors no-print"
+          >
+            ✅ Finalizar Quiz
+          </button>
+          <button
+            id="resetProgressBtn"
+            class="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-medium transition-colors no-print"
+          >
+            🔄 Resetar Progresso
+          </button>
+          <button
+            onclick="logout()"
+            class="bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-medium transition-colors no-print"
+          >
+            🚪 Sair
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quizContainer" class="hidden min-h-screen p-4">
+      <!-- Quiz Header -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-4"
+        >
+          <div>
+            <h2
+              id="currentSubjectTitle"
+              class="text-2xl font-bold text-gray-800"
+            ></h2>
+            <p class="text-gray-600">
+              Questão <span id="currentQuestionNum">1</span> de
+              <span id="totalQuestionsNum">0</span>
+            </p>
+          </div>
+          <div class="flex items-center space-x-4 mt-4 md:mt-0">
+            <div class="text-center">
+              <div class="text-xl font-bold text-blue-600" id="scoreDisplay2">
+                0
+              </div>
+              <div class="text-sm text-gray-500">Pontos</div>
             </div>
             <button
-              onclick="logout()"
-              class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm"
+              onclick="backToSubjects()"
+              class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors"
             >
-              Sair
+              ← Voltar
             </button>
           </div>
         </div>
-      </header>
 
-      <!-- Subject Selection -->
-      <div id="subjectSelection" class="p-4 max-w-6xl mx-auto">
-        <div class="text-center mb-8">
-          <h2 class="text-3xl font-bold text-white mb-4">
-            Escolha uma Matéria
-          </h2>
-          <p class="text-white/80">Selecione a disciplina que deseja estudar</p>
+        <!-- Progress Bar -->
+        <div class="w-full bg-gray-200 rounded-full h-3">
+          <div
+            id="progressBar"
+            class="bg-blue-500 h-3 rounded-full transition-all duration-300"
+            style="width: 0%"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Question Container -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <h3
+          id="questionText"
+          class="text-xl font-medium text-gray-800 mb-6 leading-relaxed"
+        ></h3>
+
+        <div id="optionsContainer" class="space-y-3 mb-6"></div>
+
+        <!-- Hint Container -->
+        <div
+          id="hintContainer"
+          class="hidden mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg"
+        >
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">💡</span>
+            <div>
+              <h4 class="font-medium text-yellow-800 mb-2">Dica:</h4>
+              <p id="hintText" class="text-yellow-700"></p>
+            </div>
+          </div>
         </div>
 
+        <!-- Feedback Container -->
+        <div id="feedbackContainer" class="hidden"></div>
+
+        <!-- Action Buttons -->
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          class="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0 sm:space-x-4"
         >
-          <!-- Subject Cards -->
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('portugues')"
+          <button
+            onclick="showHint()"
+            class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-6 rounded-lg font-medium transition-colors"
           >
-            <div class="text-4xl mb-3">📚</div>
-            <h3 class="font-bold text-gray-800 mb-2">Português</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div
-              class="bg-blue-500 text-white py-2 px-4 rounded-lg font-medium"
-            >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="portugues-status">
-              Não iniciado
-            </div>
-          </div>
+            💡 Ver Dica
+          </button>
 
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('penal')"
-          >
-            <div class="text-4xl mb-3">⚖️</div>
-            <h3 class="font-bold text-gray-800 mb-2">Direito Penal</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div class="bg-red-500 text-white py-2 px-4 rounded-lg font-medium">
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="penal-status">
-              Não iniciado
-            </div>
-          </div>
-
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('processual')"
-          >
-            <div class="text-4xl mb-3">📋</div>
-            <h3 class="font-bold text-gray-800 mb-2">Dir. Processual</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div
-              class="bg-green-500 text-white py-2 px-4 rounded-lg font-medium"
+          <div class="flex space-x-3">
+            <button
+              id="confirmBtn"
+              onclick="confirmAnswer()"
+              disabled
+              class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white py-2 px-6 rounded-lg font-medium transition-colors"
             >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="processual-status">
-              Não iniciado
-            </div>
-          </div>
-
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('constitucional')"
-          >
-            <div class="text-4xl mb-3">🏛️</div>
-            <h3 class="font-bold text-gray-800 mb-2">Dir. Constitucional</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div
-              class="bg-purple-500 text-white py-2 px-4 rounded-lg font-medium"
+              ✅ Confirmar
+            </button>
+            <button
+              id="nextBtn"
+              onclick="nextQuestion()"
+              class="hidden bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-lg font-medium transition-colors"
             >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="constitucional-status">
-              Não iniciado
-            </div>
+              ➡️ Próxima
+            </button>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('logico')"
-          >
-            <div class="text-4xl mb-3">🧮</div>
-            <h3 class="font-bold text-gray-800 mb-2">Raciocínio Lógico</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div
-              class="bg-yellow-500 text-white py-2 px-4 rounded-lg font-medium"
-            >
-              Iniciar
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="hidden min-h-screen p-4">
+      <div class="max-w-6xl mx-auto">
+        <!-- Results Header -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-6 text-center">
+          <div class="text-6xl mb-4">🎉</div>
+          <h1 class="text-4xl font-bold text-gray-800 mb-4">
+            Resultados do Quiz
+          </h1>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <div class="bg-blue-50 rounded-xl p-6">
+              <div
+                class="text-3xl font-bold text-blue-600 mb-2"
+                id="finalScoreText"
+              >
+                0/0
+              </div>
+              <div class="text-blue-800 font-medium">Pontuação Final</div>
             </div>
-            <div class="mt-2 text-xs text-gray-500" id="logico-status">
-              Não iniciado
-            </div>
-          </div>
-
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('humanos')"
-          >
-            <div class="text-4xl mb-3">🤝</div>
-            <h3 class="font-bold text-gray-800 mb-2">Direitos Humanos</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div
-              class="bg-indigo-500 text-white py-2 px-4 rounded-lg font-medium"
-            >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="humanos-status">
-              Não iniciado
-            </div>
-          </div>
-
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('especial')"
-          >
-            <div class="text-4xl mb-3">📜</div>
-            <h3 class="font-bold text-gray-800 mb-2">Leg. Especial</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div
-              class="bg-pink-500 text-white py-2 px-4 rounded-lg font-medium"
-            >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="especial-status">
-              Não iniciado
-            </div>
-          </div>
-
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('informatica')"
-          >
-            <div class="text-4xl mb-3">💻</div>
-            <h3 class="font-bold text-gray-800 mb-2">Informática</h3>
-            <p class="text-gray-600 text-sm mb-3">50 questões</p>
-            <div
-              class="bg-cyan-500 text-white py-2 px-4 rounded-lg font-medium"
-            >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="informatica-status">
-              Não iniciado
-            </div>
-          </div>
-
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('redacao')"
-          >
-            <div class="text-4xl mb-3">✍️</div>
-            <h3 class="font-bold text-gray-800 mb-2">Redação</h3>
-            <p class="text-gray-600 text-sm mb-3">5 questões</p>
-            <div
-              class="bg-orange-500 text-white py-2 px-4 rounded-lg font-medium"
-            >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="redacao-status">
-              Não iniciado
-            </div>
-          </div>
-
-          <div
-            class="subject-card bg-white rounded-xl p-6 text-center card-hover cursor-pointer"
-            onclick="startSubject('simulado')"
-          >
-            <div class="text-4xl mb-3">🎯</div>
-            <h3 class="font-bold text-gray-800 mb-2">Simulado Geral</h3>
-            <p class="text-gray-600 text-sm mb-3">100 questões mistas</p>
-            <div
-              class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-lg font-medium"
-            >
-              Iniciar
-            </div>
-            <div class="mt-2 text-xs text-gray-500" id="simulado-status">
-              Não iniciado
+            <div class="bg-green-50 rounded-xl p-6">
+              <div
+                class="text-3xl font-bold text-green-600 mb-2"
+                id="finalPercentageText"
+              >
+                0%
+              </div>
+              <div class="text-green-800 font-medium">Aproveitamento</div>
             </div>
           </div>
         </div>
 
         <!-- Action Buttons -->
-        <div class="mt-8 text-center space-y-4">
-          <button
-            id="showResultsBtn"
-            class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-lg"
-          >
-            📊 Ver Resultados Completos
-          </button>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 no-print">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <button
-              id="resetProgressBtn"
-              class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-lg font-medium"
+              onclick="backToSubjects()"
+              class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
             >
-              🔄 Resetar Progresso
+              📚 Continuar Estudando
             </button>
             <button
               id="exportResultsBtn"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium"
+              class="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
             >
-              📄 Exportar Relatório
+              📥 Exportar Resultados
+            </button>
+            <button
+              onclick="printResults()"
+              class="bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
+            >
+              🖨️ Imprimir
+            </button>
+            <button
+              onclick="shareResults()"
+              class="bg-orange-600 hover:bg-orange-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
+            >
+              📤 Compartilhar
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Quiz Container -->
-      <div id="quizContainer" class="hidden p-4 max-w-4xl mx-auto">
-        <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
-          <!-- Progress Bar -->
-          <div class="bg-gray-200 h-2">
-            <div
-              id="progressBar"
-              class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 progress-bar"
-              style="width: 0%"
-            ></div>
-          </div>
-
-          <!-- Quiz Header -->
-          <div class="p-6 bg-gradient-to-r from-blue-50 to-purple-50 border-b">
-            <div
-              class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
-            >
-              <div>
-                <h3
-                  class="text-2xl font-bold text-gray-800"
-                  id="currentSubjectTitle"
-                >
-                  Português
-                </h3>
-                <p class="text-gray-600">
-                  Questão <span id="currentQuestionNum">1</span> de
-                  <span id="totalQuestionsNum">5</span>
-                </p>
-              </div>
-              <button
-                onclick="backToSubjects()"
-                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
-              >
-                ← Voltar
-              </button>
-            </div>
-          </div>
-
-          <!-- Question Content -->
-          <div class="p-6">
-            <div class="mb-6">
-              <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                <p class="text-sm text-blue-700 font-medium">
-                  BANCA: AOCP | ANO: 2025 | NÍVEL: SUPERIOR
-                </p>
-              </div>
-
-              <h4
-                class="text-xl font-semibold text-gray-800 mb-6 leading-relaxed"
-                id="questionText"
-              >
-                Carregando questão...
-              </h4>
-            </div>
-
-            <!-- Options -->
-            <div class="space-y-3 mb-8" id="optionsContainer">
-              <!-- Options will be inserted here -->
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="space-y-4">
-              <div class="flex justify-center">
-                <button
-                  id="confirmBtn"
-                  onclick="confirmAnswer()"
-                  disabled
-                  class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-semibold text-lg transition-all"
-                >
-                  ✓ Confirmar Resposta
-                </button>
-                <button
-                  id="nextBtn"
-                  onclick="nextQuestion()"
-                  class="hidden bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-lg"
-                >
-                  Próxima Questão →
-                </button>
-              </div>
-
-              <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <button
-                  onclick="showHint()"
-                  class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium"
-                >
-                  💡 Ver Dica
-                </button>
-                <button
-                  id="finishQuizBtn"
-                  class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-medium"
-                >
-                  🏁 Finalizar Quiz
-                </button>
-              </div>
-            </div>
-
-            <!-- Hint -->
-            <div
-              id="hintContainer"
-              class="hidden mt-6 p-4 bg-yellow-50 border border-yellow-300 rounded-lg"
-            >
-              <div class="flex items-center mb-2">
-                <span class="text-2xl mr-2">💡</span>
-                <span class="font-bold text-yellow-800">Dica:</span>
-              </div>
-              <p class="text-yellow-700" id="hintText"></p>
-            </div>
-
-            <!-- Feedback -->
-            <div id="feedbackContainer" class="hidden mt-6">
-              <!-- Feedback content will be inserted here -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Results Screen -->
-      <div id="resultsScreen" class="hidden p-4 max-w-6xl mx-auto">
-        <div class="bg-white rounded-xl shadow-2xl p-8">
-          <div class="text-center mb-8">
-            <div class="text-6xl mb-4">🎉</div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">
-              Resultados do Quiz
-            </h2>
-            <div
-              class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg inline-block"
-            >
-              <p class="text-xl font-bold mb-2">Pontuação Final</p>
-              <p class="text-4xl font-bold" id="finalScoreText">0/50</p>
-              <p class="text-lg" id="finalPercentageText">0%</p>
-            </div>
-          </div>
-
-          <!-- Detailed Results -->
-          <div id="detailedResults">
-            <!-- Results content will be inserted here -->
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="text-center mt-8 space-y-4">
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onclick="backToSubjects()"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold"
-              >
-                ← Voltar ao Menu
-              </button>
-              <button
-                onclick="printResults()"
-                class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold"
-              >
-                🖨️ Imprimir
-              </button>
-              <button
-                onclick="shareResults()"
-                class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold"
-              >
-                📤 Compartilhar
-              </button>
-            </div>
-          </div>
-        </div>
+        <!-- Detailed Results -->
+        <div
+          id="detailedResults"
+          class="bg-white rounded-2xl shadow-lg p-8"
+        ></div>
       </div>
     </div>
 
     <script>
-      // Quiz Data
+      // Quiz Data - Sample questions for demonstration
       const quizData = {
         portugues: [
           {
@@ -1245,7 +1261,1549 @@
             hint: "Coerência é a lógica interna do texto, a relação harmoniosa e lógica entre as ideias apresentadas.",
             topic: "Coesão e Coerência",
           },
+          // ORTOGRAFIA (15 questões)
+          {
+            question:
+              "Assinale a alternativa em que todas as palavras estão grafadas corretamente:",
+            options: [
+              "a) Excessão, análize, paralizar",
+              "b) Exceção, análise, paralisar",
+              "c) Exceção, analise, paralizar",
+              "d) Excessão, análise, paralisar",
+              "e) Exceção, análize, paralisar",
+            ],
+            correct: 1,
+            explanation:
+              "A grafia correta é: exceção (com 'ç'), análise (com 's') e paralisar (com 's'). Exceção deriva de 'exceto', análise vem do grego e paralisar segue a regra dos verbos terminados em -isar quando o radical não tem 's'.",
+            hint: "Exceção (ç), análise (s), paralisar (s) - observe as origens das palavras.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Qual alternativa apresenta erro ortográfico?",
+            options: [
+              "a) Pesquisar, analisar, avisar",
+              "b) Paralizar, catalisar, finalizar",
+              "c) Civilizar, utilizar, fertilizar",
+              "d) Pesquizar, analisar, avisar",
+              "e) Realizar, especializar, totalizar",
+            ],
+            correct: 3,
+            explanation:
+              "A palavra correta é 'pesquisar' (com 's'), não 'pesquizar'. Verbos derivados de palavras que já têm 's' mantêm essa grafia.",
+            hint: "Pesquisa → pesquisar (mantém o 's' do radical).",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Indique a sequência correta:",
+            options: [
+              "a) Privilégio, sacrilégio, sortilério",
+              "b) Previlégio, sacrilégio, sortilégio",
+              "c) Privilégio, sacrilégio, sortilégio",
+              "d) Previlégio, sacrilégio, sortilério",
+              "e) Privilégio, sacrilério, sortilégio",
+            ],
+            correct: 2,
+            explanation:
+              "As grafias corretas são: privilégio, sacrilégio e sortilégio. Todas mantêm o 'é' na sílaba tônica e terminam em -égio.",
+            hint: "Todas terminam em -égio: privilégio, sacrilégio, sortilégio.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Assinale a alternativa com erro de grafia:",
+            options: [
+              "a) Ascensão, pretensão, dimensão",
+              "b) Extensão, compreensão, apreensão",
+              "c) Suspensão, distensão, hipertensão",
+              "d) Retenção, detenção, atenção",
+              "e) Intenção, contenção, obtenção",
+            ],
+            correct: 3,
+            explanation:
+              "Todas as palavras da alternativa 'd' estão corretas. As demais alternativas também apresentam grafias corretas. A questão testa o conhecimento das terminações -são e -ção.",
+            hint: "Palavras derivadas de verbos terminados em -ter fazem -tenção.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Complete: 'O _____ estava _____ para a _____.'",
+            options: [
+              "a) xérife, ancioso, viagem",
+              "b) xerife, ansioso, viagém",
+              "c) xérife, ansioso, viagem",
+              "d) xerife, ancioso, viagém",
+              "e) xerife, ansioso, viagem",
+            ],
+            correct: 4,
+            explanation:
+              "As grafias corretas são: xerife (sem acento), ansioso (com 's') e viagem (sem acento no 'e'). Xerife é paroxítona terminada em 'e', ansioso deriva de 'ânsia' e viagem é substantivo.",
+            hint: "Xerife (paroxítona), ansioso (de ânsia), viagem (substantivo).",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Qual palavra está grafada incorretamente?",
+            options: [
+              "a) Chuchu",
+              "b) Xuxu",
+              "c) Enxada",
+              "d) Faxina",
+              "e) Mexer",
+            ],
+            correct: 1,
+            explanation:
+              "A grafia correta é 'chuchu' (com 'ch'), não 'xuxu'. Usa-se 'ch' em palavras de origem tupi como chuchu, cachaça, etc.",
+            hint: "Chuchu é de origem tupi, por isso usa 'ch'.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Assinale a alternativa correta:",
+            options: [
+              "a) Ele quiz viajar",
+              "b) Ele quis viajar",
+              "c) Ele quís viajar",
+              "d) Ele quis viagar",
+              "e) Ele quiz viagar",
+            ],
+            correct: 1,
+            explanation:
+              "A forma correta é 'quis' (pretérito perfeito do verbo querer) e 'viajar' (infinitivo). 'Quiz' é substantivo (jogo de perguntas).",
+            hint: "Quis (verbo querer no passado), quiz (substantivo = jogo).",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Indique a grafia correta:",
+            options: [
+              "a) Beneficiente, maleficiente",
+              "b) Beneficente, maleficente",
+              "c) Benefiscente, malefiscente",
+              "d) Beneficiente, maleficente",
+              "e) Beneficente, maleficiente",
+            ],
+            correct: 1,
+            explanation:
+              "As grafias corretas são 'beneficente' e 'maleficente' (com 'c'). Derivam do latim e mantêm a grafia original.",
+            hint: "Beneficente e maleficente derivam do latim, mantêm o 'c'.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Qual sequência está correta?",
+            options: [
+              "a) Gorgeta, gergeta, gorgear",
+              "b) Gorjeta, garganta, gorjear",
+              "c) Gorgeta, garganta, gorgear",
+              "d) Gorjeta, gerganta, gorjear",
+              "e) Gorgeta, garganta, gorjear",
+            ],
+            correct: 1,
+            explanation:
+              "As grafias corretas são: gorjeta (com 'j'), garganta (com 'g') e gorjear (com 'j'). Gorjeta e gorjear têm a mesma raiz.",
+            hint: "Gorjeta e gorjear têm a mesma origem, ambos com 'j'.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Assinale a alternativa com todas as palavras corretas:",
+            options: [
+              "a) Impecilho, empecilho, obstáculo",
+              "b) Empecilho, obstáculo, embaraço",
+              "c) Impecilho, obstáculo, embaraço",
+              "d) Empecilho, obstáculo, embarasso",
+              "e) Impecilho, obstáculo, embarasso",
+            ],
+            correct: 1,
+            explanation:
+              "As grafias corretas são: empecilho (com 'e'), obstáculo e embaraço (com 'ç'). 'Impecilho' não existe.",
+            hint: "Empecilho (com 'e' inicial), embaraço (com 'ç').",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Complete corretamente: 'A _____ da _____ causou _____.'",
+            options: [
+              "a) escassês, água, transtorno",
+              "b) escassez, água, transtorno",
+              "c) escasses, água, transtorno",
+              "d) escassez, água, transtôrno",
+              "e) escassês, água, transtôrno",
+            ],
+            correct: 1,
+            explanation:
+              "As grafias corretas são: escassez (com 'z'), água e transtorno (sem acento). Escassez deriva de 'escasso' + sufixo -ez.",
+            hint: "Escassez (de escasso + -ez), transtorno (sem acento).",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Qual palavra está incorreta?",
+            options: [
+              "a) Discussão",
+              "b) Repercussão",
+              "c) Concussão",
+              "d) Percussão",
+              "e) Successo",
+            ],
+            correct: 4,
+            explanation:
+              "A grafia correta é 'sucesso' (com um 'c'), não 'successo'. As demais palavras estão corretas com 'ss'.",
+            hint: "Sucesso tem apenas um 'c', diferente das outras que têm 'ss'.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Assinale a sequência correta:",
+            options: [
+              "a) Assessor, professor, sucessor",
+              "b) Acessor, professor, sucessor",
+              "c) Assessor, professo, sucessor",
+              "d) Assessor, professor, sucesor",
+              "e) Acessor, professo, sucesor",
+            ],
+            correct: 0,
+            explanation:
+              "As grafias corretas são: assessor (com 'ss'), professor (com 'ss') e sucessor (com 'ss'). Todas derivam de verbos e mantêm o 'ss'.",
+            hint: "Assessor, professor e sucessor - todos com 'ss'.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Indique a alternativa correta:",
+            options: [
+              "a) Ele estava mau-humorado",
+              "b) Ele estava mal-humorado",
+              "c) Ele estava mau humorado",
+              "d) Ele estava mal humorado",
+              "e) Ele estava malhumorado",
+            ],
+            correct: 1,
+            explanation:
+              "A grafia correta é 'mal-humorado' (com hífen). 'Mal' é advérbio e modifica o adjetivo 'humorado', formando palavra composta.",
+            hint: "Mal-humorado: mal (advérbio) + humorado (adjetivo) = hífen.",
+            topic: "Português - Ortografia",
+          },
+          {
+            question: "Complete: 'O _____ fez uma _____ na _____.'",
+            options: [
+              "a) cirurgião, incisão, pele",
+              "b) cirurgião, incizão, pele",
+              "c) sirurgião, incisão, pele",
+              "d) cirurgião, incisão, pelle",
+              "e) sirurgião, incizão, pelle",
+            ],
+            correct: 0,
+            explanation:
+              "As grafias corretas são: cirurgião (com 'c'), incisão (com 's') e pele (com um 'l'). Cirurgião deriva do grego, incisão de 'incidir'.",
+            hint: "Cirurgião (do grego), incisão (de incidir), pele (um 'l').",
+            topic: "Português - Ortografia",
+          },
+
+          // ANÁLISE SINTÁTICA (15 questões)
+          {
+            question: "Em 'O menino comprou o livro', o termo 'o livro' é:",
+            options: [
+              "a) Sujeito",
+              "b) Objeto direto",
+              "c) Objeto indireto",
+              "d) Predicativo",
+              "e) Adjunto adverbial",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'o livro' é objeto direto, pois completa o sentido do verbo transitivo direto 'comprou' sem preposição obrigatória.",
+            hint: "Objeto direto completa verbo transitivo direto sem preposição.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Identifique o sujeito em 'Chegaram os convidados':",
+            options: [
+              "a) Chegaram",
+              "b) Os convidados",
+              "c) Convidados",
+              "d) Sujeito indeterminado",
+              "e) Oração sem sujeito",
+            ],
+            correct: 1,
+            explanation:
+              "O sujeito é 'os convidados'. É um sujeito simples posposto ao verbo. O verbo concorda com o sujeito: 'convidados chegaram'.",
+            hint: "Sujeito pode vir depois do verbo. Quem chegou? Os convidados.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Em 'Preciso de ajuda', o termo 'de ajuda' é:",
+            options: [
+              "a) Objeto direto",
+              "b) Objeto indireto",
+              "c) Adjunto adverbial",
+              "d) Complemento nominal",
+              "e) Predicativo",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'de ajuda' é objeto indireto, pois completa o sentido do verbo transitivo indireto 'precisar' através da preposição 'de'.",
+            hint: "Objeto indireto completa verbo transitivo indireto com preposição.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question:
+              "Qual é a função de 'muito inteligente' em 'O aluno é muito inteligente'?",
+            options: [
+              "a) Objeto direto",
+              "b) Predicativo do sujeito",
+              "c) Adjunto adnominal",
+              "d) Adjunto adverbial",
+              "e) Complemento nominal",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'muito inteligente' é predicativo do sujeito, pois atribui uma característica ao sujeito 'o aluno' através do verbo de ligação 'é'.",
+            hint: "Predicativo do sujeito atribui característica ao sujeito via verbo de ligação.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Em 'A casa de Pedro é bonita', o termo 'de Pedro' é:",
+            options: [
+              "a) Complemento nominal",
+              "b) Adjunto adnominal",
+              "c) Objeto indireto",
+              "d) Adjunto adverbial",
+              "e) Predicativo",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'de Pedro' é adjunto adnominal, pois se refere ao substantivo 'casa' indicando posse/pertencimento.",
+            hint: "Adjunto adnominal refere-se a substantivo. 'De Pedro' refere-se a 'casa'.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Identifique o tipo de sujeito em 'Choveu muito ontem':",
+            options: [
+              "a) Sujeito simples",
+              "b) Oração sem sujeito",
+              "c) Sujeito composto",
+              "d) Sujeito indeterminado",
+              "e) Sujeito oculto",
+            ],
+            correct: 1,
+            explanation:
+              "É uma oração sem sujeito, pois o verbo 'chover' é impessoal quando indica fenômeno da natureza.",
+            hint: "Verbos que indicam fenômenos da natureza são impessoais = sem sujeito.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Em 'João e Maria estudam', o sujeito é:",
+            options: [
+              "a) Simples",
+              "b) Composto",
+              "c) Indeterminado",
+              "d) Oculto",
+              "e) Inexistente",
+            ],
+            correct: 1,
+            explanation:
+              "O sujeito é composto porque possui dois núcleos: 'João' e 'Maria', ligados pela conjunção 'e'.",
+            hint: "Sujeito composto tem dois ou mais núcleos ligados por conjunção.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question:
+              "Qual a função de 'com cuidado' em 'Ele dirigiu com cuidado'?",
+            options: [
+              "a) Objeto indireto",
+              "b) Adjunto adverbial de modo",
+              "c) Complemento nominal",
+              "d) Adjunto adnominal",
+              "e) Predicativo",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'com cuidado' é adjunto adverbial de modo, pois indica a maneira como a ação de dirigir foi realizada.",
+            hint: "Adjunto adverbial de modo indica COMO a ação foi praticada.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Em 'Tenho medo de altura', o termo 'de altura' é:",
+            options: [
+              "a) Objeto indireto",
+              "b) Complemento nominal",
+              "c) Adjunto adnominal",
+              "d) Adjunto adverbial",
+              "e) Predicativo",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'de altura' é complemento nominal, pois completa o sentido do substantivo 'medo' através de preposição.",
+            hint: "Complemento nominal completa substantivo, adjetivo ou advérbio com preposição.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Identifique o predicado em 'Os alunos saíram cedo':",
+            options: [
+              "a) Nominal",
+              "b) Verbal",
+              "c) Verbo-nominal",
+              "d) Inexistente",
+              "e) Composto",
+            ],
+            correct: 1,
+            explanation:
+              "O predicado é verbal porque o núcleo é o verbo 'saíram' (verbo intransitivo), que expressa ação.",
+            hint: "Predicado verbal tem como núcleo um verbo significativo (ação/processo).",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Em 'Considero-o inteligente', o termo 'inteligente' é:",
+            options: [
+              "a) Adjunto adnominal",
+              "b) Predicativo do objeto",
+              "c) Predicativo do sujeito",
+              "d) Objeto direto",
+              "e) Complemento nominal",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'inteligente' é predicativo do objeto, pois atribui uma característica ao objeto direto 'o' (ele).",
+            hint: "Predicativo do objeto atribui característica ao objeto direto ou indireto.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Qual o tipo de sujeito em 'Falaram mal de você'?",
+            options: [
+              "a) Simples",
+              "b) Sujeito indeterminado",
+              "c) Composto",
+              "d) Oração sem sujeito",
+              "e) Oculto",
+            ],
+            correct: 1,
+            explanation:
+              "O sujeito é indeterminado porque não se pode identificar quem praticou a ação. O verbo está na 3ª pessoa do plural sem referência específica.",
+            hint: "Verbo na 3ª pessoa do plural sem sujeito claro = sujeito indeterminado.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Em 'Há muitos livros na biblioteca', temos:",
+            options: [
+              "a) Sujeito simples",
+              "b) Oração sem sujeito",
+              "c) Sujeito composto",
+              "d) Sujeito indeterminado",
+              "e) Sujeito oculto",
+            ],
+            correct: 1,
+            explanation:
+              "É oração sem sujeito porque o verbo 'haver' no sentido de 'existir' é impessoal, não possui sujeito.",
+            hint: "Haver (existir) é impessoal = sem sujeito. 'Muitos livros' é objeto direto.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question:
+              "Identifique a função de 'rapidamente' em 'Ele correu rapidamente':",
+            options: [
+              "a) Adjunto adnominal",
+              "b) Adjunto adverbial de modo",
+              "c) Objeto direto",
+              "d) Predicativo",
+              "e) Complemento nominal",
+            ],
+            correct: 1,
+            explanation:
+              "O termo 'rapidamente' é adjunto adverbial de modo, pois modifica o verbo 'correu' indicando a maneira da ação.",
+            hint: "Advérbios de modo (terminados em -mente) são adjuntos adverbiais de modo.",
+            topic: "Português - Análise Sintática",
+          },
+          {
+            question: "Em 'O professor explicou a matéria aos alunos', temos:",
+            options: [
+              "a) Verbo transitivo direto",
+              "b) Verbo transitivo direto e indireto",
+              "c) Verbo transitivo indireto",
+              "d) Verbo intransitivo",
+              "e) Verbo de ligação",
+            ],
+            correct: 1,
+            explanation:
+              "O verbo 'explicar' é transitivo direto e indireto: 'a matéria' (OD) e 'aos alunos' (OI). Precisa dos dois complementos.",
+            hint: "VTDI pede objeto direto E indireto. Explicar algo (OD) a alguém (OI).",
+            topic: "Português - Análise Sintática",
+          },
+
+          // MORFOLOGIA (15 questões)
+          {
+            question: "A palavra 'livraria' é formada por:",
+            options: [
+              "a) Composição",
+              "b) Derivação sufixal",
+              "c) Derivação prefixal",
+              "d) Derivação parassintética",
+              "e) Derivação regressiva",
+            ],
+            correct: 1,
+            explanation:
+              "A palavra 'livraria' é formada por derivação sufixal: livr(o) + -aria. O sufixo -aria indica lugar onde se vende algo.",
+            hint: "Derivação sufixal: radical + sufixo. Livro + -aria = livraria.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "Em 'Ele se machucou', o pronome 'se' é:",
+            options: [
+              "a) Pronome apassivador",
+              "b) Pronome reflexivo",
+              "c) Índice de indeterminação do sujeito",
+              "d) Conjunção condicional",
+              "e) Parte integrante do verbo",
+            ],
+            correct: 1,
+            explanation:
+              "O pronome 'se' é reflexivo porque indica que o sujeito pratica e sofre a ação simultaneamente: ele machucou a si mesmo.",
+            hint: "Reflexivo: sujeito pratica e sofre a ação. 'Ele machucou ele mesmo'.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "Qual palavra apresenta derivação parassintética?",
+            options: [
+              "a) Infeliz",
+              "b) Anoitecer",
+              "c) Livreiro",
+              "d) Refazer",
+              "e) Felizmente",
+            ],
+            correct: 1,
+            explanation:
+              "A palavra 'anoitecer' é formada por derivação parassintética: a- + noite + -cer. Há acréscimo simultâneo de prefixo e sufixo.",
+            hint: "Parassíntese: prefixo + radical + sufixo simultaneamente. A-noite-cer.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "O plural de 'cidadão' é:",
+            options: [
+              "a) Cidadões",
+              "b) Cidadãos",
+              "c) Cidadães",
+              "d) Cidadans",
+              "e) Cidadãoes",
+            ],
+            correct: 1,
+            explanation:
+              "O plural de 'cidadão' é 'cidadãos'. Palavras terminadas em -ão fazem plural em -ãos quando são aumentativos ou palavras oxítonas.",
+            hint: "Cidadão (oxítona terminada em -ão) → cidadãos.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question:
+              "Identifique a classe da palavra 'que' em 'O livro que comprei é interessante':",
+            options: [
+              "a) Conjunção integrante",
+              "b) Pronome relativo",
+              "c) Pronome interrogativo",
+              "d) Advérbio",
+              "e) Interjeição",
+            ],
+            correct: 1,
+            explanation:
+              "O 'que' é pronome relativo porque retoma o antecedente 'livro' e inicia uma oração subordinada adjetiva restritiva.",
+            hint: "Pronome relativo retoma termo anterior e inicia oração adjetiva.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "A palavra 'guarda-chuva' é formada por:",
+            options: [
+              "a) Derivação",
+              "b) Composição por justaposição",
+              "c) Composição por aglutinação",
+              "d) Hibridismo",
+              "e) Onomatopeia",
+            ],
+            correct: 1,
+            explanation:
+              "A palavra 'guarda-chuva' é formada por composição por justaposição: duas palavras se unem mantendo sua integridade fônica, ligadas por hífen.",
+            hint: "Justaposição: palavras unidas com hífen mantendo sons originais.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "O feminino de 'poeta' é:",
+            options: [
+              "a) Poeta",
+              "b) Poetisa",
+              "c) Poetriz",
+              "d) Poetinha",
+              "e) Poetessa",
+            ],
+            correct: 1,
+            explanation:
+              "O feminino de 'poeta' é 'poetisa'. Embora 'poeta' possa ser usado para ambos os gêneros, 'poetisa' é a forma feminina específica.",
+            hint: "Poeta → poetisa (forma feminina específica tradicional).",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "Em 'Venderam-se casas', o 'se' é:",
+            options: [
+              "a) Pronome reflexivo",
+              "b) Pronome apassivador",
+              "c) Índice de indeterminação",
+              "d) Conjunção",
+              "e) Parte do verbo",
+            ],
+            correct: 1,
+            explanation:
+              "O 'se' é pronome apassivador porque forma voz passiva sintética. Equivale a 'Casas foram vendidas'. O sujeito é 'casas'.",
+            hint: "Apassivador: VTD + se = voz passiva. 'Casas foram vendidas'.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "Qual palavra é invariável?",
+            options: [
+              "a) Qualquer",
+              "b) Talvez",
+              "c) Todo",
+              "d) Muito",
+              "e) Bastante",
+            ],
+            correct: 1,
+            explanation:
+              "A palavra 'talvez' é invariável (advérbio de dúvida). Não sofre flexão de gênero, número ou grau.",
+            hint: "Advérbios são invariáveis. Talvez é advérbio de dúvida.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "O superlativo absoluto sintético de 'fácil' é:",
+            options: [
+              "a) Muito fácil",
+              "b) Facílimo",
+              "c) Facilíssimo",
+              "d) Mais fácil",
+              "e) Fácil demais",
+            ],
+            correct: 1,
+            explanation:
+              "O superlativo absoluto sintético de 'fácil' é 'facílimo'. É uma forma erudita que mantém a raiz latina.",
+            hint: "Fácil → facílimo (forma erudita do superlativo sintético).",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "A palavra 'planalto' é formada por:",
+            options: [
+              "a) Derivação sufixal",
+              "b) Composição por aglutinação",
+              "c) Composição por justaposição",
+              "d) Derivação prefixal",
+              "e) Derivação regressiva",
+            ],
+            correct: 1,
+            explanation:
+              "A palavra 'planalto' é formada por composição por aglutinação: plan(o) + alto, com perda de fonema da primeira palavra.",
+            hint: "Aglutinação: união com perda de fonema. Plan(o) + alto = planalto.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "O grau diminutivo de 'casa' pode ser:",
+            options: [
+              "a) Apenas casinha",
+              "b) Casinha ou casita",
+              "c) Apenas casita",
+              "d) Apenas casela",
+              "e) Casona",
+            ],
+            correct: 1,
+            explanation:
+              "O diminutivo de 'casa' pode ser 'casinha' (sintético) ou 'casita' (também sintético). Ambas as formas são aceitas.",
+            hint: "Casa → casinha ou casita (ambas formas de diminutivo sintético).",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "Em 'Precisa-se de funcionários', o 'se' é:",
+            options: [
+              "a) Pronome apassivador",
+              "b) Índice de indeterminação do sujeito",
+              "c) Pronome reflexivo",
+              "d) Conjunção",
+              "e) Parte do verbo",
+            ],
+            correct: 1,
+            explanation:
+              "O 'se' é índice de indeterminação do sujeito porque o verbo é transitivo indireto ('precisar de'). O sujeito é indeterminado.",
+            hint: "VTI + se = índice de indeterminação. Sujeito indeterminado.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "A palavra 'anticonstitucional' apresenta:",
+            options: [
+              "a) Apenas sufixo",
+              "b) Prefixo e sufixo",
+              "c) Apenas prefixo",
+              "d) Composição",
+              "e) Derivação regressiva",
+            ],
+            correct: 1,
+            explanation:
+              "A palavra 'anticonstitucional' apresenta prefixo (anti-) e sufixo (-al): anti- + constitucion + -al.",
+            hint: "Anti-constitucion-al: prefixo anti- + radical + sufixo -al.",
+            topic: "Português - Morfologia",
+          },
+          {
+            question: "O coletivo de 'estrela' é:",
+            options: [
+              "a) Enxame",
+              "b) Constelação",
+              "c) Cardume",
+              "d) Alcateia",
+              "e) Rebanho",
+            ],
+            correct: 1,
+            explanation:
+              "O coletivo de 'estrela' é 'constelação'. Refere-se a um conjunto de estrelas que formam uma figura no céu.",
+            hint: "Constelação = conjunto de estrelas (coletivo específico).",
+            topic: "Português - Morfologia",
+          },
+
+          // INTERPRETAÇÃO DE TEXTOS (10 questões)
+          {
+            question:
+              "Leia: 'A educação é a arma mais poderosa que você pode usar para mudar o mundo.' (Nelson Mandela). O texto sugere que:",
+            options: [
+              "a) A educação é violenta",
+              "b) A educação é um instrumento de transformação social",
+              "c) Apenas armas podem mudar o mundo",
+              "d) A educação é perigosa",
+              "e) O mundo não pode ser mudado",
+            ],
+            correct: 1,
+            explanation:
+              "O texto usa a metáfora 'arma' para enfatizar o poder transformador da educação. Mandela defende que a educação é o meio mais eficaz para promover mudanças positivas no mundo.",
+            hint: "'Arma' aqui é metáfora para 'instrumento poderoso de transformação'.",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question:
+              "Texto: 'O silêncio do mar era quebrado apenas pelo som das ondas.' A figura de linguagem presente é:",
+            options: [
+              "a) Metáfora",
+              "b) Personificação",
+              "c) Hipérbole",
+              "d) Ironia",
+              "e) Comparação",
+            ],
+            correct: 1,
+            explanation:
+              "Há personificação porque o mar recebe característica humana (capacidade de ficar em silêncio). O mar não pode literalmente fazer silêncio.",
+            hint: "Personificação atribui características humanas a seres inanimados.",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question:
+              "'Apesar de estudar muito, não conseguiu aprovação.' A relação estabelecida é de:",
+            options: [
+              "a) Causa",
+              "b) Concessão",
+              "c) Condição",
+              "d) Tempo",
+              "e) Finalidade",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'apesar de' estabelece relação de concessão: admite um fato (estudar muito) que deveria levar a determinado resultado, mas não leva.",
+            hint: "'Apesar de' indica concessão: admite fato contrário ao esperado.",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question: "Em 'Suas palavras eram mel', temos:",
+            options: [
+              "a) Comparação",
+              "b) Metáfora",
+              "c) Metonímia",
+              "d) Hipérbole",
+              "e) Ironia",
+            ],
+            correct: 1,
+            explanation:
+              "Há metáfora porque as palavras são identificadas diretamente com mel (doçura), sem uso de conectivo comparativo.",
+            hint: "Metáfora: identificação direta sem 'como'. Palavras = mel.",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question:
+              "'Ele bebeu o cálice até a última gota.' O termo 'cálice' representa:",
+            options: [
+              "a) Apenas o objeto",
+              "b) Metonímia (continente pelo conteúdo)",
+              "c) Metáfora",
+              "d) Hipérbole",
+              "e) Personificação",
+            ],
+            correct: 1,
+            explanation:
+              "Há metonímia porque 'cálice' (continente) representa o líquido que está dentro dele (conteúdo). É a figura continente pelo conteúdo.",
+            hint: "Metonímia: cálice (recipiente) pelo líquido (conteúdo).",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question: "'Morreu de tanto rir.' A figura presente é:",
+            options: [
+              "a) Metáfora",
+              "b) Hipérbole",
+              "c) Ironia",
+              "d) Personificação",
+              "e) Comparação",
+            ],
+            correct: 1,
+            explanation:
+              "Há hipérbole porque há exagero intencional. A pessoa não morreu literalmente, mas riu muito intensamente.",
+            hint: "Hipérbole = exagero intencional para dar ênfase.",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question:
+              "Texto: 'A tecnologia aproxima quem está longe e afasta quem está perto.' O recurso usado é:",
+            options: [
+              "a) Metáfora",
+              "b) Antítese",
+              "c) Hipérbole",
+              "d) Metonímia",
+              "e) Personificação",
+            ],
+            correct: 1,
+            explanation:
+              "Há antítese pela oposição de ideias contrárias: 'aproxima/afasta' e 'longe/perto'. O contraste enfatiza o paradoxo da tecnologia.",
+            hint: "Antítese: oposição de ideias contrárias (aproxima/afasta, longe/perto).",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question: "'Que bela festa!' em um velório expressa:",
+            options: [
+              "a) Alegria sincera",
+              "b) Ironia",
+              "c) Metáfora",
+              "d) Hipérbole",
+              "e) Comparação",
+            ],
+            correct: 1,
+            explanation:
+              "Há ironia porque se diz o contrário do que se pensa. Chamar um velório de 'bela festa' é usar ironia para criticar ou expressar descontentamento.",
+            hint: "Ironia: dizer o contrário do que se pensa ou sente.",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question: "'Seus olhos eram como estrelas.' A figura presente é:",
+            options: [
+              "a) Metáfora",
+              "b) Comparação",
+              "c) Metonímia",
+              "d) Hipérbole",
+              "e) Personificação",
+            ],
+            correct: 1,
+            explanation:
+              "Há comparação (ou símile) porque usa o conectivo 'como' para estabelecer semelhança entre olhos e estrelas.",
+            hint: "Comparação usa conectivos: como, tal qual, assim como, etc.",
+            topic: "Português - Interpretação de Textos",
+          },
+          {
+            question: "Em 'O vento sussurrava segredos', há:",
+            options: [
+              "a) Metáfora",
+              "b) Personificação",
+              "c) Hipérbole",
+              "d) Ironia",
+              "e) Metonímia",
+            ],
+            correct: 1,
+            explanation:
+              "Há personificação porque o vento (ser inanimado) recebe ação humana (sussurrar) e capacidade de conhecer segredos.",
+            hint: "Personificação: vento ganha características humanas (sussurrar segredos).",
+            topic: "Português - Interpretação de Textos",
+          },
+
+          // CONJUNÇÕES (20 questões)
+          {
+            question:
+              "Em 'Estudou muito, mas não passou', a conjunção 'mas' é:",
+            options: [
+              "a) Aditiva",
+              "b) Adversativa",
+              "c) Alternativa",
+              "d) Explicativa",
+              "e) Conclusiva",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'mas' é adversativa porque expressa oposição, contraste entre as ideias: estudar muito deveria levar à aprovação, mas não levou.",
+            hint: "Adversativas expressam oposição: mas, porém, contudo, todavia.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question:
+              "A conjunção em 'Chegue cedo, pois a reunião começará em breve' é:",
+            options: [
+              "a) Adversativa",
+              "b) Explicativa",
+              "c) Conclusiva",
+              "d) Causal",
+              "e) Aditiva",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'pois' é explicativa porque justifica/explica o pedido feito na primeira oração. Explica por que deve chegar cedo.",
+            hint: "Explicativas justificam/explicam: pois, porque, que, porquanto.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question:
+              "Em 'Não veio porque estava doente', a conjunção 'porque' é:",
+            options: [
+              "a) Explicativa",
+              "b) Causal",
+              "c) Consecutiva",
+              "d) Concessiva",
+              "e) Temporal",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'porque' é causal porque indica a causa/motivo da ação de não vir. A doença é a causa da ausência.",
+            hint: "Causais indicam causa/motivo: porque, pois, já que, uma vez que.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Quanto mais estuda, mais aprende' é:",
+            options: [
+              "a) Comparativa",
+              "b) Proporcional",
+              "c) Consecutiva",
+              "d) Causal",
+              "e) Temporal",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'quanto mais... mais' é proporcional porque indica que o aumento de uma ação corresponde ao aumento da outra.",
+            hint: "Proporcionais: quanto mais...mais, à medida que, à proporção que.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "Em 'Embora chovesse, saímos', a conjunção 'embora' é:",
+            options: [
+              "a) Causal",
+              "b) Concessiva",
+              "c) Condicional",
+              "d) Temporal",
+              "e) Consecutiva",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'embora' é concessiva porque admite um fato (chover) que deveria impedir a ação, mas não impede.",
+            hint: "Concessivas admitem fato contrário: embora, ainda que, mesmo que.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Quando chegou, todos saíram' é:",
+            options: [
+              "a) Causal",
+              "b) Temporal",
+              "c) Condicional",
+              "d) Consecutiva",
+              "e) Comparativa",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'quando' é temporal porque indica o momento em que a ação da oração principal ocorreu.",
+            hint: "Temporais indicam tempo: quando, enquanto, logo que, assim que.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "Em 'Ou você estuda ou reprova', a conjunção 'ou' é:",
+            options: [
+              "a) Aditiva",
+              "b) Alternativa",
+              "c) Adversativa",
+              "d) Explicativa",
+              "e) Conclusiva",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'ou' é alternativa porque apresenta opções excludentes: uma ação exclui a outra.",
+            hint: "Alternativas apresentam opções: ou...ou, ora...ora, quer...quer.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Falou tanto que ficou rouco' é:",
+            options: [
+              "a) Causal",
+              "b) Consecutiva",
+              "c) Comparativa",
+              "d) Proporcional",
+              "e) Temporal",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'que' (precedida de 'tanto') é consecutiva porque indica a consequência da ação de falar muito.",
+            hint: "Consecutivas indicam consequência: que (após tanto, tal, tão), de modo que.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question:
+              "Em 'Estudou muito e passou no concurso', a conjunção 'e' é:",
+            options: [
+              "a) Aditiva",
+              "b) Adversativa",
+              "c) Alternativa",
+              "d) Explicativa",
+              "e) Conclusiva",
+            ],
+            correct: 0,
+            explanation:
+              "A conjunção 'e' é aditiva porque adiciona, soma ideias. Une duas ações do mesmo sujeito.",
+            hint: "Aditivas somam ideias: e, nem, não só...mas também.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Pensou muito, logo acertou' é:",
+            options: [
+              "a) Causal",
+              "b) Conclusiva",
+              "c) Consecutiva",
+              "d) Explicativa",
+              "e) Temporal",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'logo' é conclusiva porque apresenta uma conclusão baseada na oração anterior.",
+            hint: "Conclusivas apresentam conclusão: logo, portanto, por isso, assim.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "Em 'Se estudar, passará', a conjunção 'se' é:",
+            options: [
+              "a) Causal",
+              "b) Condicional",
+              "c) Temporal",
+              "d) Concessiva",
+              "e) Comparativa",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'se' é condicional porque estabelece uma condição para que a ação da oração principal se realize.",
+            hint: "Condicionais estabelecem condição: se, caso, desde que, contanto que.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Trabalha como um escravo' é:",
+            options: [
+              "a) Causal",
+              "b) Comparativa",
+              "c) Modal",
+              "d) Consecutiva",
+              "e) Proporcional",
+            ],
+            correct: 1,
+            explanation:
+              "A conjunção 'como' é comparativa porque estabelece comparação entre a maneira de trabalhar e a de um escravo.",
+            hint: "Comparativas estabelecem comparação: como, tal qual, assim como.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question:
+              "Em 'Não só estuda mas também trabalha', temos conjunção:",
+            options: [
+              "a) Aditiva",
+              "b) Adversativa",
+              "c) Alternativa",
+              "d) Explicativa",
+              "e) Conclusiva",
+            ],
+            correct: 0,
+            explanation:
+              "A locução 'não só...mas também' é aditiva porque adiciona, soma as ações de estudar e trabalhar.",
+            hint: "Não só...mas também é locução conjuntiva aditiva (soma ideias).",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Já que chegou, pode ficar' é:",
+            options: [
+              "a) Temporal",
+              "b) Causal",
+              "c) Condicional",
+              "d) Concessiva",
+              "e) Consecutiva",
+            ],
+            correct: 1,
+            explanation:
+              "A locução 'já que' é causal porque indica a causa/motivo que permite a permanência.",
+            hint: "Já que, uma vez que, visto que são locuções causais.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question:
+              "Em 'Assim que chegou, telefonou', a locução 'assim que' é:",
+            options: [
+              "a) Causal",
+              "b) Temporal",
+              "c) Consecutiva",
+              "d) Modal",
+              "e) Proporcional",
+            ],
+            correct: 1,
+            explanation:
+              "A locução 'assim que' é temporal porque indica o momento imediato em que a ação principal ocorreu.",
+            hint: "Assim que, logo que, mal indicam tempo (ação imediata).",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Ainda que seja difícil, tentarei' é:",
+            options: [
+              "a) Causal",
+              "b) Concessiva",
+              "c) Condicional",
+              "d) Temporal",
+              "e) Consecutiva",
+            ],
+            correct: 1,
+            explanation:
+              "A locução 'ainda que' é concessiva porque admite a dificuldade mas não impede a tentativa.",
+            hint: "Ainda que, mesmo que, por mais que são concessivas.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "Em 'À medida que cresce, amadurece', temos conjunção:",
+            options: [
+              "a) Temporal",
+              "b) Proporcional",
+              "c) Causal",
+              "d) Consecutiva",
+              "e) Comparativa",
+            ],
+            correct: 1,
+            explanation:
+              "A locução 'à medida que' é proporcional porque indica que o crescimento e o amadurecimento ocorrem na mesma proporção.",
+            hint: "À medida que, à proporção que indicam proporção simultânea.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Contanto que estude, passará' é:",
+            options: [
+              "a) Causal",
+              "b) Condicional",
+              "c) Temporal",
+              "d) Concessiva",
+              "e) Proporcional",
+            ],
+            correct: 1,
+            explanation:
+              "A locução 'contanto que' é condicional porque estabelece condição para que a aprovação aconteça.",
+            hint: "Contanto que, desde que, caso são condicionais.",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "Em 'Por mais que tente, não consegue', a locução é:",
+            options: [
+              "a) Causal",
+              "b) Concessiva",
+              "c) Proporcional",
+              "d) Consecutiva",
+              "e) Comparativa",
+            ],
+            correct: 1,
+            explanation:
+              "A locução 'por mais que' é concessiva porque admite o esforço (tentar) mas reconhece que não leva ao resultado esperado.",
+            hint: "Por mais que, por menos que são concessivas (admitem fato contrário).",
+            topic: "Português - Conjunções",
+          },
+          {
+            question: "A conjunção em 'Visto que não veio, começamos' é:",
+            options: [
+              "a) Temporal",
+              "b) Causal",
+              "c) Condicional",
+              "d) Concessiva",
+              "e) Consecutiva",
+            ],
+            correct: 1,
+            explanation:
+              "A locução 'visto que' é causal porque indica a causa/motivo para começar: a ausência da pessoa.",
+            hint: "Visto que, uma vez que, já que são causais (indicam motivo).",
+            topic: "Português - Conjunções",
+          },
+
+          // COLOCAÇÃO PRONOMINAL (10 questões)
+          {
+            question: "Em 'Ele se machucou ontem', a colocação pronominal é:",
+            options: [
+              "a) Próclise",
+              "b) Ênclise",
+              "c) Mesóclise",
+              "d) Incorreta",
+              "e) Facultativa",
+            ],
+            correct: 0,
+            explanation:
+              "É próclise porque o pronome 'se' está antes do verbo 'machucou'. O sujeito 'ele' atrai o pronome para antes do verbo.",
+            hint: "Próclise: pronome ANTES do verbo. Sujeito expresso atrai o pronome.",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "A colocação correta é:",
+            options: [
+              "a) Machucou-se ontem",
+              "b) Se machucou ontem",
+              "c) Machucou se ontem",
+              "d) Se-machucou ontem",
+              "e) Machucouse ontem",
+            ],
+            correct: 0,
+            explanation:
+              "Sem palavra atrativa, o pronome fica após o verbo (ênclise): 'Machucou-se ontem'. É a colocação padrão em início de período.",
+            hint: "Sem palavra atrativa, use ênclise (pronome após o verbo).",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "Em 'Não se preocupe', a colocação é:",
+            options: [
+              "a) Próclise",
+              "b) Ênclise",
+              "c) Mesóclise",
+              "d) Incorreta",
+              "e) Facultativa",
+            ],
+            correct: 0,
+            explanation:
+              "É próclise obrigatória porque a palavra negativa 'não' atrai o pronome para antes do verbo.",
+            hint: "Palavras negativas (não, nunca, nada) obrigam próclise.",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "A forma correta no futuro é:",
+            options: [
+              "a) Se preocupará",
+              "b) Preocupar-se-á",
+              "c) Preocupará-se",
+              "d) Se-preocupará",
+              "e) Preocuparse-á",
+            ],
+            correct: 1,
+            explanation:
+              "No futuro do presente, sem palavra atrativa, usa-se mesóclise: 'preocupar-se-á'. O pronome fica no meio do verbo.",
+            hint: "Futuro sem palavra atrativa = mesóclise (pronome no meio).",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "Em 'Quem te disse isso?', a colocação é:",
+            options: [
+              "a) Próclise",
+              "b) Ênclise",
+              "c) Mesóclise",
+              "d) Incorreta",
+              "e) Facultativa",
+            ],
+            correct: 0,
+            explanation:
+              "É próclise obrigatória porque o pronome interrogativo 'quem' atrai o pronome 'te' para antes do verbo.",
+            hint: "Pronomes interrogativos (quem, que, onde) obrigam próclise.",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "A colocação em 'Sempre me ajudou' é:",
+            options: [
+              "a) Próclise",
+              "b) Ênclise",
+              "c) Mesóclise",
+              "d) Incorreta",
+              "e) Facultativa",
+            ],
+            correct: 0,
+            explanation:
+              "É próclise obrigatória porque o advérbio 'sempre' (sem pausa) atrai o pronome para antes do verbo.",
+            hint: "Advérbios sem pausa atraem o pronome (próclise obrigatória).",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "No futuro do pretérito, a forma correta é:",
+            options: [
+              "a) Se preocuparia",
+              "b) Preocupar-se-ia",
+              "c) Preocuparia-se",
+              "d) Se-preocuparia",
+              "e) Preocuparse-ia",
+            ],
+            correct: 1,
+            explanation:
+              "No futuro do pretérito, sem palavra atrativa, usa-se mesóclise: 'preocupar-se-ia'.",
+            hint: "Futuro do pretérito sem palavra atrativa = mesóclise.",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "Em 'Talvez se arrependa', a colocação é:",
+            options: [
+              "a) Próclise",
+              "b) Ênclise",
+              "c) Mesóclise",
+              "d) Incorreta",
+              "e) Facultativa",
+            ],
+            correct: 0,
+            explanation:
+              "É próclise obrigatória porque 'talvez' (advérbio de dúvida) atrai o pronome para antes do verbo.",
+            hint: "Advérbios de dúvida (talvez, acaso) obrigam próclise.",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question: "A forma 'Dar-te-ei o livro' apresenta:",
+            options: [
+              "a) Próclise",
+              "b) Ênclise",
+              "c) Mesóclise",
+              "d) Erro",
+              "e) Arcaísmo",
+            ],
+            correct: 2,
+            explanation:
+              "É mesóclise: o pronome 'te' está inserido no meio do verbo 'darei'. É forma correta, embora pouco usada atualmente.",
+            hint: "Mesóclise: pronome no MEIO do verbo (dar-te-ei = darei + te).",
+            topic: "Português - Colocação Pronominal",
+          },
+          {
+            question:
+              "Em oração subordinada, 'que se preocupa', a colocação é:",
+            options: [
+              "a) Próclise",
+              "b) Ênclise",
+              "c) Mesóclise",
+              "d) Incorreta",
+              "e) Facultativa",
+            ],
+            correct: 0,
+            explanation:
+              "É próclise obrigatória porque o pronome relativo 'que' atrai o pronome 'se' para antes do verbo.",
+            hint: "Pronomes relativos (que, quem, onde) obrigam próclise.",
+            topic: "Português - Colocação Pronominal",
+          },
+
+          // ORAÇÕES SUBORDINADAS SUBSTANTIVAS (15 questões)
+          {
+            question:
+              "Em 'É necessário que você estude', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 1,
+            explanation:
+              "A oração 'que você estude' é subordinada substantiva subjetiva porque funciona como sujeito da oração principal. O sujeito de 'é necessário' é toda a oração subordinada.",
+            hint: "Subjetiva = funciona como SUJEITO. 'Que você estude' é necessário.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Espero que você venha', a oração 'que você venha' é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 0,
+            explanation:
+              "A oração 'que você venha' é subordinada substantiva objetiva direta porque completa o sentido do verbo transitivo direto 'esperar' sem preposição.",
+            hint: "Objetiva direta = completa VTD sem preposição. Espero (o quê?) que você venha.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Preciso de que você me ajude', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva objetiva indireta",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 1,
+            explanation:
+              "A oração 'de que você me ajude' é subordinada substantiva objetiva indireta porque completa o verbo transitivo indireto 'precisar' através da preposição 'de'.",
+            hint: "Objetiva indireta = completa VTI com preposição. Preciso (de quê?) de que você ajude.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Minha esperança é que tudo dê certo', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 2,
+            explanation:
+              "A oração 'que tudo dê certo' é subordinada substantiva predicativa porque funciona como predicativo do sujeito 'minha esperança' através do verbo de ligação 'é'.",
+            hint: "Predicativa = funciona como PREDICATIVO via verbo de ligação. Esperança é (o quê?) que tudo dê certo.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Tenho medo de que ele não venha', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva objetiva indireta",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 3,
+            explanation:
+              "A oração 'de que ele não venha' é subordinada substantiva completiva nominal porque completa o sentido do substantivo 'medo' através da preposição 'de'.",
+            hint: "Completiva nominal = completa SUBSTANTIVO/ADJETIVO/ADVÉRBIO com preposição. Medo (de quê?) de que ele não venha.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Só desejo uma coisa: que sejas feliz', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 4,
+            explanation:
+              "A oração 'que sejas feliz' é subordinada substantiva apositiva porque funciona como aposto, explicando/especificando o termo 'uma coisa'.",
+            hint: "Apositiva = funciona como APOSTO (explica termo anterior). Precedida de dois-pontos.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question: "Em 'Convém que todos participem', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 1,
+            explanation:
+              "A oração 'que todos participem' é subordinada substantiva subjetiva porque funciona como sujeito do verbo impessoal 'convém'.",
+            hint: "Subjetiva com verbos impessoais: convém, importa, parece, acontece + que.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question: "Em 'Perguntei se ele viria', a oração 'se ele viria' é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva objetiva indireta",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 0,
+            explanation:
+              "A oração 'se ele viria' é subordinada substantiva objetiva direta porque completa o verbo transitivo direto 'perguntar' sem preposição. O 'se' é conjunção integrante.",
+            hint: "Objetiva direta com 'se' integrante. Perguntei (o quê?) se ele viria.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Parece que vai chover', a oração 'que vai chover' é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 1,
+            explanation:
+              "A oração 'que vai chover' é subordinada substantiva subjetiva porque funciona como sujeito do verbo 'parecer'. O que parece? Que vai chover.",
+            hint: "Subjetiva: 'Que vai chover' parece. A oração é o sujeito de 'parece'.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question: "Em 'Estou certo de que ele virá', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva objetiva indireta",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 3,
+            explanation:
+              "A oração 'de que ele virá' é subordinada substantiva completiva nominal porque completa o sentido do adjetivo 'certo' através da preposição 'de'.",
+            hint: "Completiva nominal completa ADJETIVO. Certo (de quê?) de que ele virá.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Aconteceu que ele não veio', a oração 'que ele não veio' é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 1,
+            explanation:
+              "A oração 'que ele não veio' é subordinada substantiva subjetiva porque funciona como sujeito do verbo 'acontecer'. O que aconteceu? Que ele não veio.",
+            hint: "Subjetiva: o que aconteceu foi 'que ele não veio'. A oração é sujeito.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question: "Em 'Duvido de que seja verdade', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva objetiva indireta",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 1,
+            explanation:
+              "A oração 'de que seja verdade' é subordinada substantiva objetiva indireta porque completa o verbo transitivo indireto 'duvidar' através da preposição 'de'.",
+            hint: "Objetiva indireta: VTI + preposição. Duvido (de quê?) de que seja verdade.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'A verdade é que ninguém sabe', a oração 'que ninguém sabe' é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 2,
+            explanation:
+              "A oração 'que ninguém sabe' é subordinada substantiva predicativa porque funciona como predicativo do sujeito 'a verdade' através do verbo de ligação 'é'.",
+            hint: "Predicativa: sujeito + verbo de ligação + oração. A verdade é (o quê?) que ninguém sabe.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Importa que você venha cedo', a oração 'que você venha cedo' é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva subjetiva",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 1,
+            explanation:
+              "A oração 'que você venha cedo' é subordinada substantiva subjetiva porque funciona como sujeito do verbo impessoal 'importar'.",
+            hint: "Subjetiva: o que importa é 'que você venha cedo'. Verbo impessoal + oração subjetiva.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
+          {
+            question:
+              "Em 'Tenho certeza de que tudo dará certo', a oração destacada é:",
+            options: [
+              "a) Subordinada substantiva objetiva direta",
+              "b) Subordinada substantiva objetiva indireta",
+              "c) Subordinada substantiva predicativa",
+              "d) Subordinada substantiva completiva nominal",
+              "e) Subordinada substantiva apositiva",
+            ],
+            correct: 3,
+            explanation:
+              "A oração 'de que tudo dará certo' é subordinada substantiva completiva nominal porque completa o sentido do substantivo 'certeza' através da preposição 'de'.",
+            hint: "Completiva nominal completa SUBSTANTIVO. Certeza (de quê?) de que tudo dará certo.",
+            topic: "Português - Orações Subordinadas Substantivas",
+          },
         ],
+
         penal: [
           {
             question:
@@ -8528,32 +10086,42 @@
             loginTime: new Date().toISOString(),
           };
 
-          // Load previous data if exists
-          const savedUser = loadFromLocalStorage();
+          // Initialize user data structure
+          Object.keys(quizData).forEach((subject) => {
+            if (!userAnswers[subject]) {
+              userAnswers[subject] = [];
+            }
+          });
 
+          // Show main interface
           document.getElementById("loginScreen").classList.add("hidden");
-          document.getElementById("quizInterface").classList.remove("hidden");
-          document.getElementById("userWelcome").textContent = `Olá, ${name}!`;
+          document
+            .getElementById("subjectSelection")
+            .classList.remove("hidden");
 
+          // Update displays
+          document.getElementById("userNameDisplay").textContent =
+            currentUser.name;
           updateScoreDisplay();
           updateSubjectStatus();
+
           saveToLocalStorage();
         });
 
-      // Quiz Functions
       function startSubject(subject) {
         currentSubject = subject;
         currentQuestionIndex = 0;
-        selectedAnswer = null;
-        hintUsed = false;
 
+        // Initialize subject answers array if needed
         if (!userAnswers[subject]) {
           userAnswers[subject] = [];
         }
 
+        // Hide subject selection and show quiz
         document.getElementById("subjectSelection").classList.add("hidden");
         document.getElementById("quizContainer").classList.remove("hidden");
 
+        // Update subject title and total questions
         const subjectNames = {
           portugues: "PORTUGUÊS",
           penal: "DIREITO PENAL",
@@ -8621,7 +10189,6 @@
           div.classList.remove("border-blue-500", "bg-blue-100");
           div.classList.add("border-gray-200");
         });
-
         // Add selection to clicked option
         element.classList.remove("border-gray-200");
         element.classList.add("border-blue-500", "bg-blue-100");
@@ -8775,10 +10342,22 @@
       }
 
       function updateScoreDisplay() {
+        // Calculate total questions available
+        const totalQuestions = Object.values(quizData).reduce(
+          (total, subject) => total + subject.length,
+          0
+        );
+
         document.getElementById("scoreDisplay").textContent = totalScore;
         document.getElementById(
           "progressDisplay"
-        ).textContent = `${totalAnswered}/50`;
+        ).textContent = `${totalAnswered}/${totalQuestions}`;
+
+        // Also update the score display in quiz screen if it exists
+        const scoreDisplay2 = document.getElementById("scoreDisplay2");
+        if (scoreDisplay2) {
+          scoreDisplay2.textContent = totalScore;
+        }
       }
 
       function updateSubjectStatus() {
@@ -8811,7 +10390,11 @@
         }
 
         const completedSubjects = Object.keys(subjectProgress).length;
-        const confirmMessage = `Deseja finalizar o quiz?\n\n📊 Estatísticas atuais:\n• Questões respondidas: ${totalAnswered}/50\n• Pontuação: ${totalScore} pontos\n• Matérias concluídas: ${completedSubjects}/10\n\nClique OK para ver seus resultados detalhados.`;
+        const totalQuestions = Object.values(quizData).reduce(
+          (total, subject) => total + subject.length,
+          0
+        );
+        const confirmMessage = `Deseja finalizar o quiz?\n\n📊 Estatísticas atuais:\n• Questões respondidas: ${totalAnswered}/${totalQuestions}\n• Pontuação: ${totalScore} pontos\n• Matérias concluídas: ${completedSubjects}/8\n\nClique OK para ver seus resultados detalhados.`;
 
         if (confirm(confirmMessage)) {
           showResults();
@@ -9070,7 +10653,7 @@
             : 0;
         const completedSubjects = Object.keys(subjectProgress).length;
 
-        const shareText = `🚔 Quiz Polícia Penal 2025 - Meus Resultados\n\n📊 Pontuação: ${totalScore}/${totalAnswered} (${percentage}%)\n📚 Matérias concluídas: ${completedSubjects}/10\n\n#QuizPoliciaPenal #AOCP2025 #Concurso`;
+        const shareText = `🚔 Quiz Polícia Penal 2025 - Meus Resultados\n\n📊 Pontuação: ${totalScore}/${totalAnswered} (${percentage}%)\n📚 Matérias concluídas: ${completedSubjects}/8\n\n#QuizPoliciaPenal #AOCP2025 #Concurso`;
 
         if (navigator.share) {
           navigator.share({
@@ -9097,6 +10680,17 @@
 
       // Initialize
       window.addEventListener("load", function () {
+        // Calculate and display total questions
+        const totalQuestions = Object.values(quizData).reduce(
+          (total, subject) => total + subject.length,
+          0
+        );
+        const totalQuestionsInfo =
+          document.getElementById("totalQuestionsInfo");
+        if (totalQuestionsInfo) {
+          totalQuestionsInfo.textContent = `📊 ${totalQuestions} questões disponíveis`;
+        }
+
         // Always show login screen first
         // Load saved data but don't auto-login
         loadFromLocalStorage();
@@ -9156,6 +10750,41 @@
             var d = b.createElement("script");
             d.innerHTML =
               "window.__CF$cv$params={r:'978d617a306fdc81',t:'MTc1NjgyMDAyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9795ac5b00f0a197',t:'MTc1NjkwNjk3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
