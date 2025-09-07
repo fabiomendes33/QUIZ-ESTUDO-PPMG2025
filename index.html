@@ -150,7 +150,7 @@
             PORTUGUÊS
           </h3>
           <p class="text-gray-600 text-sm text-center mb-4">
-            Gramática, interpretação e redação
+            Gramática, interpretação
           </p>
           <div
             class="bg-blue-500 text-white py-2 px-4 rounded-lg font-medium text-center"
@@ -205,7 +205,32 @@
             Iniciar
           </div>
           <div
-            id="administrativas-status"
+            id="administrativo-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Redaçao -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('redaçao')"
+        >
+          <div class="text-4xl mb-4 text-center">🧮</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            REDAÇAO
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            redaçao e dissertaçao
+          </p>
+          <div
+            class="bg-yellow-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="redaçao-status"
             class="mt-2 text-xs text-gray-500 text-center"
           >
             Não iniciado
@@ -354,6 +379,31 @@
           </div>
           <div
             id="informatica-status"
+            class="mt-2 text-xs text-gray-500 text-center"
+          >
+            Não iniciado
+          </div>
+        </div>
+
+        <!-- Simulado -->
+        <div
+          class="subject-card bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer"
+          onclick="startSubject('simulado')"
+        >
+          <div class="text-4xl mb-4 text-center">📚</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">
+            SIMULADO
+          </h3>
+          <p class="text-gray-600 text-sm text-center mb-4">
+            diversos questoes
+          </p>
+          <div
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg font-medium text-center"
+          >
+            Iniciar
+          </div>
+          <div
+            id="simulado-status"
             class="mt-2 text-xs text-gray-500 text-center"
           >
             Não iniciado
@@ -16860,7 +16910,8 @@
             topic: "Segurança da Informação - Ética e Legislação",
           },
         ],
-        redacao: [
+
+        redaçao: [
           {
             question:
               "Em uma redação dissertativa-argumentativa, a tese deve aparecer:",
@@ -16937,6 +16988,717 @@
               "Argumentos sólidos baseiam-se em evidências concretas (dados, estatísticas), exemplos relevantes, citações de autoridade e raciocínio lógico consistente.",
             hint: "Argumento forte = evidência + lógica. Use dados, exemplos e raciocínio para convencer, não apenas opinião.",
             topic: "Argumentação",
+          },
+          {
+            question:
+              "Qual é a principal função da introdução em um texto dissertativo-argumentativo?",
+            options: [
+              "a) Resumir todos os argumentos que serão utilizados",
+              "b) Apresentar o tema e a tese (ponto de vista) que será defendida",
+              "c) Apresentar uma citação de impacto para impressionar o corretor",
+              "d) Concluir o raciocínio desenvolvido no texto",
+            ],
+            correct: 1,
+            explanation:
+              "A introdução deve contextualizar o tema proposto e apresentar claramente a tese, que é a ideia principal ou o posicionamento que o autor irá defender ao longo dos parágrafos de desenvolvimento.",
+            hint: "Pense na introdução como o 'cartão de visita' do seu texto, onde você diz ao leitor sobre o que vai falar e qual é a sua opinião.",
+            topic: "Estrutura do Texto Dissertativo-Argumentativo",
+          },
+          {
+            question: "O que é a 'tese' de uma redação?",
+            options: [
+              "a) O primeiro argumento do texto",
+              "b) O título da redação",
+              "c) A proposta de intervenção social",
+              "d) A ideia principal, o ponto de vista central que será defendido",
+            ],
+            correct: 3,
+            explanation:
+              "A tese é o coração do texto dissertativo-argumentativo. É a afirmação principal, a opinião do autor sobre o tema, que será justificada e comprovada pelos argumentos no desenvolvimento.",
+            hint: "É a sua 'opinião' transformada em uma frase afirmativa.",
+            topic: "Estrutura do Texto Dissertativo-Argumentativo",
+          },
+          {
+            question:
+              "Nos parágrafos de desenvolvimento, qual é o objetivo principal?",
+            options: [
+              "a) Apenas reescrever a tese com outras palavras",
+              "b) Apresentar novos temas não relacionados à introdução",
+              "c) Apresentar, explicar e aprofundar os argumentos que sustentam a tese",
+              "d) Fazer um resumo do que já foi dito",
+            ],
+            correct: 2,
+            explanation:
+              "Cada parágrafo de desenvolvimento deve ser dedicado a um argumento específico que comprove a validade da sua tese. É o momento de usar dados, exemplos, citações e raciocínio lógico.",
+            hint: "O desenvolvimento é a 'prova' de que a sua tese está correta.",
+            topic: "Estrutura do Texto Dissertativo-Argumentativo",
+          },
+          {
+            question: "A coesão textual refere-se, principalmente, a:",
+            options: [
+              "a) A lógica e o sentido entre as partes do texto",
+              "b) O uso correto da gramática e da ortografia",
+              "c) A ligação gramatical entre palavras, orações e parágrafos, usando conectivos",
+              "d) A originalidade das ideias apresentadas",
+            ],
+            correct: 2,
+            explanation:
+              "A coesão é a 'costura' gramatical do texto. Ela é garantida pelo uso adequado de preposições, conjunções, pronomes e outros elementos que ligam as partes do texto, dando fluidez à leitura.",
+            hint: "Pense na coesão como a 'cola' que une as peças do seu texto.",
+            topic: "Coesão e Coerência",
+          },
+          {
+            question: "A coerência textual está relacionada com:",
+            options: [
+              "a) O uso de palavras difíceis",
+              "b) A ausência de erros de português",
+              "c) A ligação harmoniosa e lógica das ideias, evitando contradições",
+              "d) O tamanho dos parágrafos",
+            ],
+            correct: 2,
+            explanation:
+              "A coerência é a relação lógica entre as ideias do texto. Um texto coerente é aquele em que as partes se encaixam, não há contradições e o raciocínio progride de forma clara e compreensível.",
+            hint: "Um texto coerente 'faz sentido' do início ao fim.",
+            topic: "Coesão e Coerência",
+          },
+          {
+            question:
+              "Qual dos seguintes conectivos expressa uma ideia de oposição ou contraste?",
+            options: [
+              "a) Portanto",
+              "b) Além disso",
+              "c) Entretanto",
+              "d) Assim",
+            ],
+            correct: 2,
+            explanation:
+              "'Entretanto' é uma conjunção adversativa, usada para introduzir uma ideia que se contrapõe à anterior. Sinónimos comuns são 'mas', 'porém', 'contudo'.",
+            hint: "Procure a palavra que serve para apresentar um 'porém'.",
+            topic: "Coesão Textual",
+          },
+          {
+            question: "O que se deve evitar na conclusão de uma redação?",
+            options: [
+              "a) Retomar a tese",
+              "b) Apresentar uma proposta de intervenção",
+              "c) Iniciar um novo argumento ou apresentar uma nova ideia que não foi discutida",
+              "d) Fazer uma síntese das ideias principais",
+            ],
+            correct: 2,
+            explanation:
+              "A conclusão é o momento de 'fechar' o texto. Apresentar um novo argumento neste ponto deixaria o texto 'aberto' e sem a devida exploração, prejudicando a coerência.",
+            hint: "A conclusão serve para amarrar as pontas, não para criar novas.",
+            topic: "Estrutura do Texto Dissertativo-Argumentativo",
+          },
+          {
+            question:
+              "Usar dados estatísticos do IBGE para comprovar um argumento é uma estratégia argumentativa de:",
+            options: [
+              "a) Argumento de autoridade",
+              "b) Argumento por exemplificação",
+              "c) Argumento por dados concretos",
+              "d) Argumento por causa e consequência",
+            ],
+            correct: 2,
+            explanation:
+              "A utilização de dados estatísticos, pesquisas e informações numéricas de fontes confiáveis é uma forma de argumentação por dados concretos, que confere grande credibilidade e objetividade ao texto.",
+            hint: "Números e estatísticas dão força e 'concretude' ao seu argumento.",
+            topic: "Tipos de Argumentos",
+          },
+          {
+            question:
+              "A frase 'A violência é como uma erva daninha que, se não for cortada pela raiz, contamina toda a sociedade' utiliza qual figura de linguagem como estratégia argumentativa?",
+            options: [
+              "a) Metonímia",
+              "b) Hipérbole",
+              "c) Comparação (ou Símile)",
+              "d) Ironia",
+            ],
+            correct: 2,
+            explanation:
+              "A presença do conectivo 'como' estabelece uma comparação explícita entre a 'violência' e a 'erva daninha', transferindo as características desta (crescimento rápido, dificuldade de erradicação) para aquela, tornando o argumento mais claro e impactante.",
+            hint: "O uso da palavra 'como' é a marca principal desta figura de linguagem.",
+            topic: "Estratégias Argumentativas",
+          },
+          {
+            question: "O que é um 'tópico frasal'?",
+            options: [
+              "a) O título da redação",
+              "b) A última frase da conclusão",
+              "c) A ideia central de um parágrafo de desenvolvimento, geralmente apresentada na primeira frase",
+              "d) Uma citação usada na introdução",
+            ],
+            correct: 2,
+            explanation:
+              "O tópico frasal (ou frase-núcleo) é a frase que abre um parágrafo de desenvolvimento, apresentando de forma concisa a ideia principal que será explicada, aprofundada e exemplificada no restante do parágrafo.",
+            hint: "É a 'tese' do seu parágrafo.",
+            topic: "Estrutura do Parágrafo",
+          },
+          {
+            question:
+              "Qual das seguintes opções é um exemplo de vício de linguagem conhecido como 'clichê' ou 'lugar-comum'?",
+            options: [
+              "a) A educação é a base de tudo.",
+              "b) O índice de desemprego aumentou 5% no último trimestre.",
+              "c) Segundo Platão, o conhecimento é a virtude.",
+              "d) É preciso analisar as causas e as consequências do problema.",
+            ],
+            correct: 0,
+            explanation:
+              "'A educação é a base de tudo' é uma frase tão repetida que perdeu a originalidade e a força argumentativa, tornando-se um clichê que deve ser evitado em redações.",
+            hint: "Pense em frases prontas e muito repetidas que todo mundo usa.",
+            topic: "Vícios de Linguagem",
+          },
+          {
+            question:
+              "A impessoalidade, uma característica importante do texto dissertativo, é obtida principalmente pelo uso:",
+            options: [
+              "a) Da primeira pessoa do singular ('Eu acho que...')",
+              "b) De gírias e linguagem coloquial",
+              "c) Da terceira pessoa do singular ou de construções impessoais ('Observa-se que...', 'É notório que...')",
+              "d) De frases muito longas e complexas",
+            ],
+            correct: 2,
+            explanation:
+              "Para manter a objetividade e a impessoalidade, deve-se evitar o uso da primeira pessoa. O uso da terceira pessoa ou de estruturas como a voz passiva sintética ('Sabe-se que...') confere um tom mais formal e distanciado ao texto.",
+            hint: "Evite usar 'eu' na sua redação.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question: "Qual a diferença entre tema e título?",
+            options: [
+              "a) Não há diferença, são a mesma coisa.",
+              "b) O tema é o assunto geral, enquanto o título é um nome específico e opcional para a redação.",
+              "c) O título é obrigatório e o tema é opcional.",
+              "d) O tema é uma frase curta e o título é um parágrafo.",
+            ],
+            correct: 1,
+            explanation:
+              "O tema é a ideia central proposta pela banca (ex: 'O desafio da segurança pública no Brasil'). O título é uma 'etiqueta' que você cria para o seu texto (ex: 'Ordem e Progresso: Uma Utopia?'), e geralmente é opcional, a menos que a prova exija.",
+            hint: "O tema é dado a você, o título é criado por você.",
+            topic: "Estrutura do Texto Dissertativo-Argumentativo",
+          },
+          {
+            question:
+              "A 'proposta de intervenção', exigida em muitas redações de concurso, deve ser apresentada:",
+            options: [
+              "a) Na introdução, para já mostrar a solução",
+              "b) Em um parágrafo de desenvolvimento",
+              "c) Na conclusão, como fechamento do texto",
+              "d) Em qualquer parte do texto",
+            ],
+            correct: 2,
+            explanation:
+              "A conclusão é o local ideal para a proposta de intervenção, pois ela surge como uma consequência lógica da discussão desenvolvida. Após analisar o problema, você propõe uma solução.",
+            hint: "Depois de discutir o problema, você apresenta a solução.",
+            topic: "Proposta de Intervenção",
+          },
+          {
+            question:
+              "Uma proposta de intervenção completa deve conter, no mínimo, quais elementos?",
+            options: [
+              "a) Ação, agente, meio/modo, finalidade e detalhamento",
+              "b) Apenas a ação e o agente",
+              "c) Apenas a finalidade da ação",
+              "d) Um desejo de que o problema se resolva",
+            ],
+            correct: 0,
+            explanation:
+              "Uma proposta de intervenção eficaz deve responder a cinco perguntas: O que fazer? (Ação), Quem vai fazer? (Agente), Como vai fazer? (Meio/Modo), Para que fazer? (Finalidade) e um detalhamento de um desses elementos.",
+            hint: "Pense em responder às perguntas: O quê? Quem? Como? Para quê?",
+            topic: "Proposta de Intervenção",
+          },
+          {
+            question:
+              "O uso da primeira pessoa do plural ('nós'), como em 'Precisamos entender que a sociedade...', torna o texto:",
+            options: [
+              "a) Mais pessoal e inadequado para uma dissertação",
+              "b) Mais impessoal e objetivo",
+              "c) Mais universal e engajado, sendo uma estratégia válida",
+              "d) Gramaticalmente incorreto",
+            ],
+            correct: 2,
+            explanation:
+              "O uso da primeira pessoa do plural ('nós inclusivo') é uma estratégia argumentativa aceita que busca incluir o leitor na discussão, criando um senso de responsabilidade compartilhada, sem tornar o texto excessivamente pessoal como o 'eu'.",
+            hint: "O 'nós' pode ser uma ferramenta para criar uma conexão com o leitor.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question: "O que caracteriza a tipologia textual 'dissertação'?",
+            options: [
+              "a) Contar uma história com personagens, tempo e espaço",
+              "b) Descrever detalhadamente um objeto, pessoa ou lugar",
+              "c) Defender um ponto de vista com base em argumentos",
+              "d) Dar instruções ou ordens",
+            ],
+            correct: 2,
+            explanation:
+              "A dissertação é o tipo textual que se propõe a discutir um tema, analisar ideias e, no caso da dissertação-argumentativa, defender uma tese por meio de uma argumentação consistente.",
+            hint: "Dissertar é 'discutir', 'argumentar' sobre um assunto.",
+            topic: "Tipologias Textuais",
+          },
+          {
+            question:
+              "Usar a citação 'O homem é o lobo do homem', de Thomas Hobbes, para discutir a violência, é um argumento de:",
+            options: [
+              "a) Causa e consequência",
+              "b) Exemplificação",
+              "c) Autoridade",
+              "d) Dados concretos",
+            ],
+            correct: 2,
+            explanation:
+              "O argumento de autoridade utiliza a citação de um especialista, filósofo, cientista ou obra de renome para dar credibilidade e embasamento teórico ao ponto de vista defendido.",
+            hint: "Você está usando a 'autoridade' de um pensador famoso para reforçar sua ideia.",
+            topic: "Tipos de Argumentos",
+          },
+          {
+            question:
+              "A progressão textual, um elemento da coerência, significa que:",
+            options: [
+              "a) O texto deve ser sempre longo",
+              "b) Cada parágrafo deve repetir a ideia do anterior",
+              "c) As ideias devem avançar, acrescentando novas informações e aprofundando a discussão",
+              "d) A linguagem deve ser sempre a mesma do início ao fim",
+            ],
+            correct: 2,
+            explanation:
+              "Um texto coerente não pode ficar 'andando em círculos'. A progressão textual exige que novas informações sejam agregadas a cada parágrafo, fazendo com que o raciocínio evolua em direção à conclusão.",
+            hint: "O seu texto precisa 'progredir', 'avançar' na discussão.",
+            topic: "Coesão e Coerência",
+          },
+          {
+            question: "Qual é a principal função da paragrafação em um texto?",
+            options: [
+              "a) Apenas estética, para o texto não ficar um bloco só",
+              "b) Dividir o texto em partes de tamanho igual",
+              "c) Organizar as ideias, agrupando em cada parágrafo uma unidade de sentido",
+              "d) Indicar o início e o fim da redação",
+            ],
+            correct: 2,
+            explanation:
+              "A paragrafação é um recurso de coesão e coerência. Cada parágrafo deve desenvolver uma ideia principal (tópico frasal) que se relacione com a tese geral do texto, servindo para organizar o raciocínio de forma clara.",
+            hint: "Cada parágrafo = uma ideia principal.",
+            topic: "Estrutura do Parágrafo",
+          },
+          {
+            question:
+              "Qual dos conectivos abaixo é inadequado para iniciar o parágrafo de conclusão?",
+            options: [
+              "a) Portanto,",
+              "b) Em suma,",
+              "c) Diante do exposto,",
+              "d) Primeiramente,",
+            ],
+            correct: 3,
+            explanation:
+              "'Primeiramente' é um conectivo usado para iniciar uma enumeração de argumentos, sendo típico do desenvolvimento. Os outros são conectivos conclusivos.",
+            hint: "Pense em qual palavra indica 'começo' e não 'fim'.",
+            topic: "Coesão Textual",
+          },
+          {
+            question:
+              "A concisão é uma qualidade de um bom texto que significa:",
+            options: [
+              "a) Usar muitas palavras para expressar uma ideia",
+              "b) Escrever um texto muito curto",
+              "c) Expressar as ideias de forma direta e económica, sem palavras desnecessárias",
+              "d) Usar uma linguagem muito formal e complexa",
+            ],
+            correct: 2,
+            explanation:
+              "Ser conciso é ir direto ao ponto, evitando rodeios, repetições e palavras supérfluas. É a arte de dizer muito com poucas palavras.",
+            hint: "Conciso = ser breve e preciso.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question: "O que é um 'argumento por exemplificação'?",
+            options: [
+              "a) Citar a opinião de um especialista",
+              "b) Apresentar dados estatísticos",
+              "c) Usar um fato concreto, uma notícia ou um evento histórico para ilustrar e comprovar a tese",
+              "d) Explicar as causas de um problema",
+            ],
+            correct: 2,
+            explanation:
+              "Nesta estratégia, o autor utiliza um exemplo específico e conhecido (de um filme, livro, notícia, evento histórico) para tornar a sua argumentação mais concreta e persuasiva para o leitor.",
+            hint: "É usar um 'exemplo' para provar o seu ponto.",
+            topic: "Tipos de Argumentos",
+          },
+          {
+            question: "A clareza de um texto depende fundamentalmente de:",
+            options: [
+              "a) Usar vocabulário rebuscado",
+              "b) Construir frases curtas e diretas, com pontuação correta e ordem lógica",
+              "c) Escrever parágrafos muito longos",
+              "d) Repetir a mesma ideia várias vezes",
+            ],
+            correct: 1,
+            explanation:
+              "Para que um texto seja claro, as frases devem ser bem estruturadas (sujeito-verbo-complemento), a pontuação deve ser precisa e o vocabulário, adequado e sem ambiguidades.",
+            hint: "Texto claro é aquele que o leitor entende sem precisar de reler várias vezes.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question:
+              "Na estrutura 'problema-causas-consequências-solução', em qual parte do texto a proposta de intervenção se encaixa melhor?",
+            options: [
+              "a) Problema (introdução)",
+              "b) Causas (1º desenvolvimento)",
+              "c) Consequências (2º desenvolvimento)",
+              "d) Solução (conclusão)",
+            ],
+            correct: 3,
+            explanation:
+              "Esta é uma estrutura clássica. A introdução apresenta o problema. O desenvolvimento analisa suas causas e consequências. A conclusão, logicamente, apresenta a solução (proposta de intervenção).",
+            hint: "A estrutura do texto deve seguir uma progressão lógica.",
+            topic: "Estrutura do Texto Dissertativo-Argumentativo",
+          },
+          {
+            question: "O uso de 'onde' deve se referir exclusivamente a:",
+            options: ["a) Tempo", "b) Modo", "c) Pessoa", "d) Lugar físico"],
+            correct: 3,
+            explanation:
+              "O pronome/advérbio 'onde' só deve ser usado para indicar lugar físico. Para outras situações, deve-se usar 'em que', 'no qual', 'na qual'. Ex: 'A reunião em que discutimos...' e não 'A reunião onde...'",
+            hint: "'Onde' só serve para lugar. Casa onde moro. Cidade onde nasci.",
+            topic: "Gramática Aplicada à Redação",
+          },
+          {
+            question: "O que é intertextualidade em uma redação?",
+            options: [
+              "a) Escrever um texto sem parágrafos",
+              "b) O diálogo entre o seu texto e outros textos (livros, filmes, músicas, notícias)",
+              "c) Usar apenas as suas próprias ideias",
+              "d) Cometer plágio",
+            ],
+            correct: 1,
+            explanation:
+              "Intertextualidade é quando um texto faz referência a outro, seja por citação, alusão ou paráfrase. É um recurso que demonstra repertório sociocultural e enriquece a argumentação.",
+            hint: "Pense em 'inter' (entre) + 'texto'. É uma conversa 'entre textos'.",
+            topic: "Estratégias Argumentativas",
+          },
+          {
+            question: "Qual a função da contra-argumentação em um texto?",
+            options: [
+              "a) Concordar com todas as opiniões existentes",
+              "b) Apresentar um argumento contrário à sua própria tese para depois refutá-lo, fortalecendo seu ponto de vista",
+              "c) Mudar de opinião no meio do texto",
+              "d) Ignorar os pontos de vista diferentes do seu",
+            ],
+            correct: 1,
+            explanation:
+              "A contra-argumentação é uma estratégia sofisticada. O autor antecipa uma possível objeção à sua tese, apresenta-a e, em seguida, mostra por que essa objeção é inválida ou fraca, o que fortalece a sua tese original.",
+            hint: "É como prever o que seu 'adversário' diria e já preparar a resposta.",
+            topic: "Estratégias Argumentativas",
+          },
+          {
+            question:
+              "A repetição excessiva da mesma palavra em um parágrafo prejudica qual qualidade do texto?",
+            options: [
+              "a) A objetividade",
+              "b) A coesão, por falta de recursos como sinónimos e pronomes",
+              "c) A coerência",
+              "d) A impessoalidade",
+            ],
+            correct: 1,
+            explanation:
+              "A repetição desnecessária torna o texto pobre e cansativo. A coesão lexical exige que o autor utilize recursos como sinónimos, pronomes, elipses e hiperónimos para evitar essa repetição.",
+            hint: "Um bom texto varia o vocabulário.",
+            topic: "Coesão Textual",
+          },
+          {
+            question:
+              "A frase 'O governo deve conscientizar a população' é considerada uma proposta de intervenção:",
+            options: [
+              "a) Completa e detalhada",
+              "b) Vaga e genérica, precisando de detalhamento",
+              "c) Inadequada, pois o governo não pode fazer isso",
+              "d) Original e criativa",
+            ],
+            correct: 1,
+            explanation:
+              "Essa é uma das propostas mais vagas e comuns. Uma boa proposta deve detalhar COMO essa conscientização será feita (meio/modo), QUEM exatamente fará (agente), PARA QUÊ (finalidade) e com que detalhes.",
+            hint: "Sempre se pergunte: 'Como?' 'Por meio de quê?'.",
+            topic: "Proposta de Intervenção",
+          },
+          {
+            question: "O que significa dizer que um texto deve ter 'unidade'?",
+            options: [
+              "a) Que ele deve ter apenas um parágrafo",
+              "b) Que todas as suas partes (frases, parágrafos) devem estar interligadas e voltadas para a defesa da mesma tese central",
+              "c) Que ele deve tratar de vários temas ao mesmo tempo",
+              "d) Que o autor deve usar sempre o mesmo tipo de frase",
+            ],
+            correct: 1,
+            explanation:
+              "A unidade é um princípio da coerência. Significa que o texto, apesar de dividido em partes, deve ser um 'todo' coeso, onde cada parágrafo contribui para um objetivo comum: defender a tese.",
+            hint: "O texto deve ter um foco, um fio condutor do início ao fim.",
+            topic: "Coesão e Coerência",
+          },
+          {
+            question:
+              "Em qual tipo textual predomina o uso de verbos no pretérito perfeito e imperfeito para contar uma sequência de eventos?",
+            options: [
+              "a) Dissertação",
+              "b) Descrição",
+              "c) Narração",
+              "d) Injunção",
+            ],
+            correct: 2,
+            explanation:
+              "A narração é o tipo textual que conta uma história, real ou fictícia. A sucessão de acontecimentos no tempo é sua característica principal, marcada pelo uso de verbos no passado.",
+            hint: "Pense em 'contar uma história'.",
+            topic: "Tipologias Textuais",
+          },
+          {
+            question:
+              "A expressão 'em primeiro lugar', usada para iniciar um parágrafo, é um operador argumentativo que indica:",
+            options: [
+              "a) Conclusão",
+              "b) Oposição",
+              "c) Prioridade ou início de uma enumeração",
+              "d) Comparação",
+            ],
+            correct: 2,
+            explanation:
+              "Este é um operador argumentativo que ordena as ideias, indicando para o leitor que aquele é o primeiro argumento de uma série que será apresentada.",
+            hint: "É um marcador de sequência.",
+            topic: "Coesão Textual",
+          },
+          {
+            question:
+              "A utilização da frase 'Compro-lhe um carro, desde que você passe no concurso' estabelece uma relação de:",
+            options: [
+              "a) Causa",
+              "b) Concessão",
+              "c) Condição",
+              "d) Finalidade",
+            ],
+            correct: 2,
+            explanation:
+              "A locução conjuntiva 'desde que' estabelece uma condição. A compra do carro está condicionada à aprovação no concurso.",
+            hint: "A ação principal só acontece 'se' a outra acontecer.",
+            topic: "Gramática Aplicada à Redação",
+          },
+          {
+            question:
+              "Qual dos seguintes elementos NÃO é adequado para iniciar uma redação?",
+            options: [
+              "a) Uma alusão histórica",
+              "b) Uma citação filosófica",
+              "c) A definição de um conceito-chave do tema",
+              "d) A frase 'Neste texto, eu vou falar sobre...'",
+            ],
+            correct: 3,
+            explanation:
+              "Anunciar o que será feito ('vou falar', 'vou discutir') é uma abordagem considerada pobre e pouco elegante. A introdução deve apresentar o tema e a tese de forma mais fluida e integrada.",
+            hint: "Mostre, não anuncie.",
+            topic: "Estrutura do Texto Dissertativo-Argumentativo",
+          },
+          {
+            question: "O que é 'paralelismo sintático'?",
+            options: [
+              "a) Usar frases de tamanhos iguais",
+              "b) Repetir a mesma palavra várias vezes",
+              "c) A estruturação simétrica de frases ou orações, usando a mesma construção gramatical",
+              "d) Escrever em duas colunas paralelas",
+            ],
+            correct: 2,
+            explanation:
+              "O paralelismo sintático contribui para a clareza e a coesão. Se você começa uma enumeração com um verbo no infinitivo, os outros itens também devem começar. Ex: 'É preciso investir em educação e garantir a segurança' (e não '...e que a segurança seja garantida').",
+            hint: "É manter a 'mesma estrutura' para ideias que são paralelas.",
+            topic: "Gramática Aplicada à Redação",
+          },
+          {
+            question: "A coesão por elipse consiste em:",
+            options: [
+              "a) Usar um sinónimo para evitar repetição",
+              "b) Omitir um termo que pode ser facilmente subentendido pelo contexto",
+              "c) Usar uma conjunção para ligar duas orações",
+              "d) Repetir a mesma palavra para dar ênfase",
+            ],
+            correct: 1,
+            explanation:
+              "A elipse é a omissão de um termo para evitar a repetição, sem que a frase perca o sentido. Ex: 'João foi à feira; Maria, ao mercado.' (omissão do verbo 'foi').",
+            hint: "Pense em 'eclipse', a 'ocultação' de um termo.",
+            topic: "Coesão Textual",
+          },
+          {
+            question:
+              "Ao usar uma citação direta (transcrição exata) na redação, o que é indispensável?",
+            options: [
+              "a) Colocar a citação em itálico",
+              "b) Colocar a citação entre aspas e, se possível, indicar a fonte",
+              "c) Resumir a citação com as suas próprias palavras",
+              "d) Concordar com a citação",
+            ],
+            correct: 1,
+            explanation:
+              "Citações diretas devem ser marcadas com aspas para indicar ao leitor que aquele trecho não é de autoria de quem escreve a redação. A indicação da fonte (autor) confere credibilidade.",
+            hint: "As aspas servem para 'isolar' a fala de outra pessoa no seu texto.",
+            topic: "Estratégias Argumentativas",
+          },
+          {
+            question:
+              "Qual o principal risco de usar um 'modelo pronto' de redação?",
+            options: [
+              "a) Garantir uma nota alta, pois os modelos são bons",
+              "b) Tornar o texto artificial, desvinculado do tema específico e ser penalizado por falta de autoria",
+              "c) Facilitar o processo de escrita",
+              "d) Não há riscos, é a melhor estratégia",
+            ],
+            correct: 1,
+            explanation:
+              "Modelos prontos geralmente resultam em textos genéricos, com argumentação superficial e que não se aprofundam na especificidade do tema proposto, o que é severamente penalizado pelos corretores.",
+            hint: "Os corretores são treinados para identificar textos que seguem um 'esqueleto' engessado.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question:
+              "A objetividade em um texto dissertativo é alcançada ao evitar:",
+            options: [
+              "a) Dados estatísticos",
+              "b) Argumentos lógicos",
+              "c) Juízos de valor muito pessoais, sentimentalismos e generalizações vagas",
+              "d) Uma linguagem formal",
+            ],
+            correct: 2,
+            explanation:
+              "Um texto objetivo foca-se nos factos, nos argumentos e nos dados, evitando impressões subjetivas, emoções e afirmações sem fundamento (generalizações).",
+            hint: "Seja factual e analítico, não emocional.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question:
+              "Qual o problema da frase 'Hoje em dia, todo mundo sabe que a violência aumentou'?",
+            options: [
+              "a) É uma frase muito longa",
+              "b) Usa uma linguagem informal",
+              "c) É uma generalização baseada no senso comum, sem dados que a comprovem",
+              "d) Contém um erro de concordância",
+            ],
+            correct: 2,
+            explanation:
+              "Frases baseadas no senso comum ('todo mundo sabe', 'desde os primórdios') são vagas e enfraquecem a argumentação, que deve ser baseada em factos e dados concretos, e não em perceções gerais.",
+            hint: "Evite afirmações que começam com 'Todo mundo...' ou 'Ninguém...'.",
+            topic: "Argumentação",
+          },
+          {
+            question:
+              "A transição entre os parágrafos de desenvolvimento deve ser feita:",
+            options: [
+              "a) De forma abrupta, sem ligação",
+              "b) Repetindo a última frase do parágrafo anterior",
+              "c) Usando operadores argumentativos que conectem a ideia anterior com a próxima",
+              "d) Começando todos os parágrafos com a mesma palavra",
+            ],
+            correct: 2,
+            explanation:
+              "Para garantir a coesão e a progressão do texto, é essencial usar conectivos que estabeleçam a relação lógica entre os parágrafos (ex: 'Além disso,', 'Outro ponto relevante é...', 'Em contrapartida,').",
+            hint: "Os parágrafos precisam 'conversar' entre si.",
+            topic: "Coesão Textual",
+          },
+          {
+            question: "O que é uma paráfrase?",
+            options: [
+              "a) Uma cópia exata de um trecho de outro autor",
+              "b) A reescrita de uma ideia de outro autor com as suas próprias palavras, mantendo o sentido original",
+              "c) Uma citação curta",
+              "d) Um erro gramatical",
+            ],
+            correct: 1,
+            explanation:
+              "A paráfrase é uma forma de intertextualidade em que se 'traduz' a ideia de um autor para a sua própria linguagem. É uma ótima maneira de usar repertório sem precisar de decorar a citação exata.",
+            hint: "É 'dizer a mesma coisa, mas com outras palavras'.",
+            topic: "Estratégias Argumentativas",
+          },
+          {
+            question:
+              "Um parágrafo de desenvolvimento bem estruturado geralmente contém:",
+            options: [
+              "a) Apenas um exemplo longo",
+              "b) Tópico frasal, ampliação/explicação do argumento, e fundamentação (exemplo, dado)",
+              "c) Várias ideias diferentes sem conexão",
+              "d) Apenas a citação de um filósofo",
+            ],
+            correct: 1,
+            explanation:
+              "A estrutura ideal de um parágrafo argumentativo é apresentar a ideia (tópico frasal), explicar essa ideia (ampliação) e, por fim, comprová-la com um facto, dado ou exemplo (fundamentação).",
+            hint: "Pense na estrutura: Apresente, Explique, Comprove.",
+            topic: "Estrutura do Parágrafo",
+          },
+          {
+            question:
+              "A ambiguidade, um defeito textual, ocorre quando uma frase:",
+            options: [
+              "a) É muito longa",
+              "b) Apresenta mais de uma possibilidade de interpretação",
+              "c) Tem erros de ortografia",
+              "d) Usa linguagem formal",
+            ],
+            correct: 1,
+            explanation:
+              "A ambiguidade acontece quando uma construção frasal permite duas ou mais leituras, gerando confusão. Ex: 'O polícia prendeu o ladrão na sua casa.' (Na casa de quem?). Deve ser evitada para garantir a clareza.",
+            hint: "É quando a frase tem 'duplo sentido' sem ser intencional.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question:
+              "Qual é a função do repertório sociocultural em uma redação?",
+            options: [
+              "a) Apenas para aumentar o número de linhas do texto",
+              "b) Para mostrar que o autor lê muito, sem relação com o tema",
+              "c) Para embasar e fortalecer os argumentos, demonstrando que o autor tem conhecimento de mundo",
+              "d) Para substituir os argumentos próprios",
+            ],
+            correct: 2,
+            explanation:
+              "O repertório sociocultural (conhecimentos de história, filosofia, sociologia, artes, atualidades) serve para fundamentar a argumentação, mostrando que o ponto de vista do autor não é baseado em 'achismos', mas sim em conhecimento consolidado.",
+            hint: "É o seu 'arsenal' de conhecimentos para usar na batalha da argumentação.",
+            topic: "Argumentação",
+          },
+          {
+            question:
+              "A linguagem a ser utilizada em uma redação de concurso deve ser, predominantemente:",
+            options: [
+              "a) Coloquial e informal, para criar proximidade com o corretor",
+              "b) Técnica e especializada, usando jargões da área",
+              "c) Pessoal e emotiva, expressando sentimentos",
+              "d) Formal e denotativa, seguindo a norma-padrão da língua",
+            ],
+            correct: 3,
+            explanation:
+              "A redação de concurso exige o uso da norma-padrão da língua portuguesa, com uma linguagem formal, objetiva e denotativa (sentido literal das palavras), evitando gírias, coloquialismos e sentimentalismos.",
+            hint: "É um documento formal, portanto, a linguagem deve ser formal.",
+            topic: "Qualidades do Texto Dissertativo",
+          },
+          {
+            question: "O que é um argumento de 'causa e consequência'?",
+            options: [
+              "a) Comparar duas realidades diferentes",
+              "b) Apresentar os motivos que levam a um problema e os seus efeitos na sociedade",
+              "c) Citar a opinião de um especialista",
+              "d) Usar um exemplo histórico",
+            ],
+            correct: 1,
+            explanation:
+              "Nesta estratégia, o autor organiza seu raciocínio mostrando as origens e as causas de um determinado problema e, em seguida, discutindo seus desdobramentos e consequências para a sociedade.",
+            hint: "É a estrutura de 'Por que o problema existe?' (causa) e 'Quais são os seus efeitos?' (consequência).",
+            topic: "Tipos de Argumentos",
+          },
+          {
+            question: "A frase 'Subir para cima' é um exemplo de:",
+            options: [
+              "a) Pleonasmo vicioso (redundância)",
+              "b) Metáfora",
+              "c) Eufemismo",
+              "d) Ironia",
+            ],
+            correct: 0,
+            explanation:
+              "É um pleonasmo vicioso, pois a ideia de 'subir' já implica o movimento 'para cima', tornando a expressão redundante e desnecessária. Deve ser evitado na escrita formal.",
+            hint: "É uma repetição de ideias que não acrescenta informação.",
+            topic: "Vícios de Linguagem",
           },
         ],
         simulado: [
@@ -18876,7 +19638,7 @@
           humanos: "Direitos Humanos",
           especial: "Legislação Especial",
           informatica: "Informática",
-          redacao: "Redação",
+          redaçao: "Redação",
           simulado: "Simulado Geral",
         };
 
@@ -19043,7 +19805,7 @@
               humanos: "bg-indigo-500",
               especial: "bg-pink-500",
               informatica: "bg-cyan-500",
-              redacao: "bg-orange-500",
+              redaçao: "bg-yellow-500",
               simulado: "bg-gradient-to-r from-purple-500 to-pink-500",
             };
             button.textContent = "Iniciar";
